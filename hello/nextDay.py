@@ -2,35 +2,97 @@
 from django.shortcuts import render
 import csv
 import datetime
-import time
+import re
 
-def nextDay():
-    while True:
-        year = input("请输入年：")
-        if 1800<=year<=2100:
-            month = input("请输入月：")
-            if 1<=month<=12:
-                day = input("请输入日：")
-                if 1<=day<=31:
-                    is_valied_date(year, month, day)
-                    break
-                else:
-                    print "日错误"
+def nextDay(year,month,day,resultLst):
+    if 1800<=int(year)<=2100:
+        if 1<=int(month)<=12:
+            if 1<=int(day)<=31:
+                is_valied_date(year, month, day,resultLst)
             else:
-                print "月错误"
+                result = "日错误"
+                resultLst.append(result)
         else:
-            print "年错误"
+            result = "月错误"
+            resultLst.append(result)
+    else:
+        result = "年错误"
+        resultLst.append(result)
 
-def is_valied_date(year, month, day):
+def csv_nextDay(year,month,day,resultLst):
+    if 1800<=year<=2100:
+        if 1<=month<=12:
+            if 1<=day<=31:
+                is_valied_date(year, month, day,resultLst)
+            else:
+                result = "日错误"
+                resultLst.append(result)
+        else:
+            result = "月错误"
+            resultLst.append(result)
+    else:
+        result = "年错误"
+        resultLst.append(result)
+
+def is_valied_date(year, month, day,resultLst):
   '''判断是否是一个有效的日期字符串'''
-  ndate = '-'.join([str(year), str(month), str(day)])
+  y = str(year).zfill(4)
+  m = str(month).zfill(2)
+  d = str(day).zfill(2)
+  ndate = '-'.join([str(y), str(m), str(d)])
+  dateFormat = re.match(
+      r'(([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-02-29)',
+      ndate)
+  if dateFormat:
+      is_theNextDay(year, month, day,resultLst)
+  else:
+      result = "错误日期"
+      resultLst.append(result)
+  """
   try:
     time.strptime(ndate, "%Y-%m-%d")
-    is_theNextDay(year, month, day)
+    is_theNextDay(year, month, day,resultLst)
   except:
-    print "错误日期"
+    result = "错误日期"
+    resultLst.append(result)
+    traceback.print_exc()
+   """
 
-def is_theNextDay(year,month,day):
+def is_theNextDay(year,month,day,resultLst):
     thisDay = datetime.date(int(year),int(month),int(day))
     nextDay = thisDay + datetime.timedelta(days=1)
-    print 'thisDay:',thisDay,'nextDay:',nextDay
+    result = nextDay.isoformat()
+    resultLst.append(result)
+
+def readCsv(resultLst):
+    csvfile = file('date.csv', 'rb')
+    csvfile.readline()
+    reader = csv.reader(csvfile)
+    for line in reader:
+        year = int(line[0])
+        month = int(line[1])
+        day = int(line[2])
+        csv_nextDay(year, month, day,resultLst)
+
+def nextDay_Post(request):
+    year = request.POST["year"]
+    month = request.POST["month"]
+    day = request.POST["day"]
+    resultLst = ['error']
+    nextDay(year, month, day, resultLst)
+    context = {}
+    context['nextDay'] = resultLst[1]
+    return render(request, 'nextDay.html', context)
+
+def nextDay_Post_Csv(request):
+    resultLst = []
+    readCsv(resultLst)
+    context = {}
+    context['nextDayList'] = resultLst
+    return render(request, 'nextDay.html', context)
+
+def nextDay_Get(request):
+    context = {}
+    context['nextDay'] = "result"
+    return render(request, 'nextDay.html', context)
+

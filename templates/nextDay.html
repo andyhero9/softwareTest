@@ -5,6 +5,31 @@
     <title>Title</title>
 </head>
 <body>
-
+    <div>
+        <form action="/next-post/" method="post">
+            {% csrf_token %}
+            <input type="text" name="year">年
+            <input type="text" name="month">月
+            <input type="text" name="day">日
+            <input type="submit">
+        </form>
+        <p>{{nextDay}}</p>
+    </div>
+    <div>
+        <form action="/nextCsv-post/" method="post">
+            {% csrf_token %}
+            <input type="submit">
+        </form>
+        {% for i in nextDayList %}
+            <p>{{ i }}</p>
+        {% endfor %}
+    </div>
+    <div>
+        <form enctype="multipart/form-data" action="/uploadFile/" method="post">
+            {% csrf_token %}
+           <input type="file" name="myfile">
+           <input type="submit" value="upload">
+        </form>
+    </div>
 </body>
 </html>
