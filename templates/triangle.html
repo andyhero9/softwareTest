@@ -17,6 +17,13 @@
         <input type="text" name="filePath">
         <input type="submit">{{ button }}</input>
     </form>
+    <div>
+        <form enctype="multipart/form-data" action="/traingleCsv_Post/" method="post">
+            {% csrf_token %}
+           <input type="file" name="myfile">
+           <input type="submit" value="upload">
+        </form>
+    </div>
     <div class="div1">
         <table>
             <tr><td><b>输入值</b></td></tr>

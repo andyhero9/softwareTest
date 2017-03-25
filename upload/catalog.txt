@@ -1,0 +1,1 @@
+E:/Django_project/softwareTest/upload/triangle.csv

@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^next-post/', nextDay.nextDay_Post),
     url(r'^nextCsv-post/', nextDay.nextDay_Post_Csv),
     url(r'^uploadFile/', upload.loadCsv_Post),
+    url(r'^traingleCsv_Post/', upload.traingleCsv_Post),
 ]

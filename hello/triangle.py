@@ -40,7 +40,9 @@ def isTriangle(a,b,c,resultLst):
 
 def triangle_post(request):
     #filePath = str(request.POST["filePath"])
-    csvfile = file('triangle.csv', 'rb')
+    fo = open("E:/Django_project/softwareTest/upload/catalog.txt", "rb")
+    filePath = fo.read();
+    csvfile = file(filePath, 'rb')
     csvfile.readline()
     reader = csv.reader(csvfile)
     sideLst = []

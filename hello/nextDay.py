@@ -65,7 +65,9 @@ def is_theNextDay(year,month,day,resultLst):
     resultLst.append(result)
 
 def readCsv(resultLst):
-    csvfile = file('date.csv', 'rb')
+    fo = open("E:/Django_project/softwareTest/upload/catalog.txt", "rb")
+    filePath = fo.read();
+    csvfile = file(filePath, 'rb')
     csvfile.readline()
     reader = csv.reader(csvfile)
     for line in reader:
