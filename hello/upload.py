@@ -13,6 +13,7 @@ def loadCsv_Post(request):
         for chunk in myFile.chunks():  # 分块写入文件
             destination.write(chunk)
         destination.close()
+        
         filePath = ''.join(["E:/Django_project/softwareTest/upload/",myFile.name])
         fo = open("E:/Django_project/softwareTest/upload/catalog.txt", "wb")
         fo.write(filePath)

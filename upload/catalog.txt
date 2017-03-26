@@ -1,1 +1,1 @@
-E:/Django_project/softwareTest/upload/triangle.csv
+../softwareTest/upload/triangle.csv

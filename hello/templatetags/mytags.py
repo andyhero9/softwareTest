@@ -12,6 +12,9 @@ def qwer1(value):
 		i = i + 1
 		return str(value)
 	else:
-		return i
+		i = 1
+		return value[0]
+	
+	
 
 

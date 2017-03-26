@@ -123,24 +123,22 @@
 			</p>
 		</fieldset>
 
-				<form enctype="multipart/form-data" action="/nextCsv-post/" method="post">
-					{% csrf_token %}
-					<input type="file" name="myfile">
-					<input type="submit" value="确定">
-				</form>
-
-
 		<fieldset>
 			<legend>CSV Dates Testing</legend>
 			<div class="row">
-				<form action="/nextCsv-post/" method="post">
+				<form enctype="multipart/form-data" action="/nextCsv-post/" method="post">
 					{% csrf_token %}
-					<div class="large-9 columns">
-						<input type="text" name="myFile" placeholder="输入文件">
+					<div class="large-6 columns">
+						<input type="file" name="myFile" placeholder="上传文件">
 					</div>
+
+					<div class="large-3 columns">
+						<p style="color: #C91623;">{{ isUploaded }}</p>
+					</div>
+
 					<div class="large-3 columns">
 						<input type="submit" class="button postfix "
-						       style="width: 70%; margin-left: 15%; border-radius: 5px;">
+						       style="width: 70%; margin-left: 15%; border-radius: 5px;" value="确 定">
 					</div>
 				</form>
 			</div>

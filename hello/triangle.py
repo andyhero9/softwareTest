@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 import csv
+import os
 
 
 def isTriangle(a, b, c, resultLst, percentage):
@@ -49,7 +50,28 @@ def isTriangle(a, b, c, resultLst, percentage):
 
 
 def triangle_post(request):
-	filePath = str(request.POST["filePath"])
+	context = {}
+	myfile = request.FILES.get("myFile", None)  # 获取上传的文件，如果没有文件，则默认为None
+	if not myfile:
+		context['isUploaded'] = "no files for upload!"
+	# return render(request, 'triangle.html', context)
+	
+	destination = open(os.path.join("../softwareTest/upload", myfile.name), 'wb+')  # 打开特定的文件进行二进制的写操作
+	for chunk in myfile.chunks():  # 分块写入文件
+		destination.write(chunk)
+	destination.close()
+	
+	filePath = ''.join(["../softwareTest/upload/", myfile.name])
+	fo = open("../softwareTest/upload/catalog.txt", "wb")
+	fo.write(filePath)
+	fo.close()
+	context['isUploaded'] = "upload over!"
+
+
+	# return render(request, 'triangle.html', context)
+	
+	# filePath = str(request.POST["filePath"])
+	
 	csvfile = file(filePath, 'rb')
 	csvfile.readline()
 	reader = csv.reader(csvfile)
@@ -67,8 +89,7 @@ def triangle_post(request):
 		isTriangle(a, b, c, resultLst, percentage)
 		side = str(a) + ',' + str(b) + ',' + str(c)
 		sideLst.append(side)
-		context = {}
-	context['button'] = "check to start"
+		
 	context['sideLst'] = sideLst
 	context['resultLst'] = resultLst
 	context['total'] = len(resultLst)
@@ -77,10 +98,8 @@ def triangle_post(request):
 	context['wrongInputPer'] = percentage.count('wrongInput')
 	context['isTriPer'] = percentage.count('isTri')
 	print(percentage)
-	return render(request, 'index.html', context)
-
-#
-# def triangle(request):
-# 	context = {}
-# 	context['button'] = "check to start"
-# 	return render(request, 'triangle.html', context)
+	return render(request, 'index.html', context)  #
+	# def triangle(request):
+	# 	context = {}
+	# 	context['button'] = "check to start"
+	# 	return render(request, 'triangle.html', context)

@@ -97,14 +97,20 @@
 		<fieldset>
 			<legend>Triangles Testing</legend>
 			<div class="row">
-				<form action="/triangle/" method="post">
+
+				<form enctype="multipart/form-data" action="/triangle/" method="post">
 					{% csrf_token %}
-					<div class="large-9 columns">
-						<input type="text" name="filePath">
+					<div class="large-6 columns">
+						<input type="file" name="myFile" placeholder="上传文件">
 					</div>
+
+					<div class="large-3 columns">
+						<p style="color: #C91623;">{{ isUploaded }}</p>
+					</div>
+
 					<div class="large-3 columns">
 						<input type="submit" class="button postfix "
-						       style="width: 70%; margin-left: 15%; border-radius: 5px;">
+						       style="width: 70%; margin-left: 15%; border-radius: 5px;" value="提 交">
 					</div>
 				</form>
 			</div>
