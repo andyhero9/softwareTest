@@ -59,7 +59,7 @@
 
 </head>
 
-<body>
+<body style="margin-left: 8%;margin-right: 8%;">
 <nav class="top-bar" data-topbar>
 	<ul class="title-area">
 		<li class="name">
@@ -84,7 +84,7 @@
 	</section>
 </nav>
 
-<div class="row" style="max-width:100rem;margin-top: 30px;">
+<div class="row" style="max-width:100rem; margin-top: 30px;background-color: #cfd0cd1a;padding: 20px;">
 	<div class="large-7 columns" style="border-right:dotted; border-color: #008CBA;border-width: 1px">
 		<h3>测 试</h3>
 		<ul class="side-nav">
@@ -129,7 +129,8 @@
 				<form enctype="multipart/form-data" action="/nextCsv-post/" method="post">
 					{% csrf_token %}
 					<div class="large-6 columns">
-						<input type="file" name="myFile" placeholder="上传文件">
+						<input type="file" name="myFile" placeholder="上传文件" class="button postfix"
+						       style="padding-left: 20px; background-color: #008cba33">
 					</div>
 
 					<div class="large-3 columns">

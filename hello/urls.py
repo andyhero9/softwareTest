@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from . import triangle, index, nextDay, upload, calendar
+from . import triangle, index, nextDay, calendar
 
 urlpatterns = [
 	url(r'^admin/', admin.site.urls),
@@ -27,6 +27,4 @@ urlpatterns = [
 	url(r'^next/', nextDay.nextDay_Get),
 	url(r'^next-post/', nextDay.nextDay_Post),
 	url(r'^nextCsv-post/', nextDay.nextDay_Post_Csv),
-	url(r'^uploadFile/', upload.loadCsv_Post),
-	url(r'^traingleCsv_Post/', upload.traingleCsv_Post),
 ]
