@@ -1,13 +1,145 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+	<title>软件测试</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../static/css/foundation.min.css">
+	<script src="../static/js/foundation.min.js"></script>
+	<script src="../static/js/vendor/modernizr.js"></script>
+	<script src="../static/js/vendor/jquery.js"></script>
+	<script src="../static/js/highcharts.src.js"></script>
 </head>
+
 <body>
-<li ><a href="http://127.0.0.1:8000/triangle">triangle</a></li>
-<li></li>
-<input type="button" value="triangle"/>
-<input type="button" value="nextDay"/>
+<nav class="top-bar" data-topbar>
+	<ul class="title-area">
+		<li class="name">
+			<h1 style="font-family:Monospace;font-size:1.2em;"><a href="#">S O F T W A R E - T E S T I N G</a></h1>
+		</li>
+		<!-- 小屏幕上折叠按钮: 去掉 .menu-icon 类，可以去除图标。
+  如果需要只显示图片，可以删除 "Menu" 文本 -->
+		<li class="toggle-topbar menu-icon"><a href="#"><span>TEST</span></a></li>
+	</ul>
+
+	<section class="top-bar-section">
+		<ul class="left">
+			<li class="active"><a href="">三 角 形</a></li>
+			<li class="divider"></li>
+			<li><a href="calendar.html">下 一 日 期</a></li>
+			<li class="divider"></li>
+			<li><a href="#">推 销 员</a></li>
+			<li class="divider"></li>
+			<li><a href="#">。。。</a></li>
+			<li class="divider"></li>
+		</ul>
+	</section>
+</nav>
+
+<div style="padding:20px;">
+	<div class="row" style="max-width:100rem">
+		<div class="large-7 columns">
+			<h2>响应式表格</h2>
+
+			<form action="/triangle/" method="post">
+				{% csrf_token %}
+				<input type="text" name="filePath">
+				<input type="submit">
+			</form>
+
+			<div class="div1">
+				<table>
+					<tr>
+						<td><b>输入值</b></td>
+					</tr>
+					{% for i in sideLst %}
+						<tr>
+							<td>{{ i }}</td>
+						</tr>
+					{% endfor %}
+				</table>
+				<table>
+					<tr>
+						<td><b>预期结果</b></td>
+					</tr>
+					{% for j in expectLst %}
+						<tr>
+							<td>{{ j }}</td>
+						</tr>
+					{% endfor %}
+				</table>
+				<table>
+					<tr>
+						<td><b>输出结果</b></td>
+					</tr>
+					{% for k in resultLst %}
+						<tr>
+							<td>{{ k }}</td>
+						</tr>
+					{% endfor %}
+				</table>
+			</div>
+
+
+			<div class="responsive">
+				<table>
+					<thead>
+					<tr>
+						<th>Firstname</th>
+						<th>Lastname</th>
+						<th>Email</th>
+						<th>City</th>
+						<th>Age</th>
+						<th>Country</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>John</td>
+						<td>Doe</td>
+						<td>john@example.com</td>
+						<td>New York</td>
+						<td>35</td>
+						<td>USA</td>
+					</tr>
+					<tr>
+						<td>Mary</td>
+						<td>Moe</td>
+						<td>mary@example.com</td>
+						<td>Chicago</td>
+						<td>51</td>
+						<td>USA</td>
+					</tr>
+					<tr>
+						<td>July</td>
+						<td>Dooley</td>
+						<td>july@example.com</td>
+						<td>San Francisco</td>
+						<td>38</td>
+						<td>USA</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="large-5 columns">.small-4 .large-3 orange
+			<div id="container5" style="width: 500px; height: 400px; margin: 0 auto"></div>
+		</div>
+	</div>
+</div>
+
+
+<script src="../static/js/myjs.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $(document).foundation();
+    })
+
+</script>
+
+
 </body>
+
 </html>

@@ -20,8 +20,8 @@ from . import triangle,index,nextDay,upload
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^index/', index.index),
-    url(r'^triangle/', triangle.triangle),
-    url(r'^triangle-post/', triangle.triangle_post),
+    url(r'^triangle/', triangle.triangle_post),
+    # url(r'^triangle-post/', triangle.triangle_post),
     url(r'^next/', nextDay.nextDay_Get),
     url(r'^next-post/', nextDay.nextDay_Post),
     url(r'^nextCsv-post/', nextDay.nextDay_Post_Csv),

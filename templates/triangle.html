@@ -1,48 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <style type="text/css">
-        body{ text-align:center}
-        table{width: 230px;float: left;margin-left: 20px}
-        td{border-top:1px solid #000;border-bottom:1px solid #000;width: 220px; height: 20px;}
-        span{}
-        .div1{ margin:0 auto; margin-top: 20px; width:800px; height:500px; border:1px #000}
-    </style>
-    <title>Title</title>
-</head>
-<body>
-    <form action="/triangle-post/" method="post">
-        {% csrf_token %}
-        <input type="text" name="filePath">
-        <input type="submit">{{ button }}</input>
-    </form>
-    <div>
-        <form enctype="multipart/form-data" action="/traingleCsv_Post/" method="post">
-            {% csrf_token %}
-           <input type="file" name="myfile">
-           <input type="submit" value="upload">
-        </form>
-    </div>
-    <div class="div1">
-        <table>
-            <tr><td><b>输入值</b></td></tr>
-            {% for i in sideLst %}
-                <tr><td>{{ i }}</td></tr>
-            {% endfor %}
-        </table>
-        <table>
-            <tr><td><b>预期结果</b></td></tr>
-            {% for j in expectLst %}
-                <tr><td>{{ j }}</td></tr>
-            {% endfor %}
-        </table>
-        <table>
-            <tr><td><b>输出结果</b></td></tr>
-            {% for k in resultLst %}
-                <tr><td>{{ k }}</td></tr>
-            {% endfor %}
-        </table>
-    </div>
-</body>
-</html>
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <style type="text/css">#}
+{#        body{ text-align:center}#}
+{#        table{width: 230px;float: left;margin-left: 20px}#}
+{#        td{border-top:1px solid #000;border-bottom:1px solid #000;width: 220px; height: 20px;}#}
+{#        span{}#}
+{#        .div1{ margin:0 auto; margin-top: 20px; width:800px; height:500px; border:1px #000}#}
+{#    </style>#}
+{#    <title>Title</title>#}
+{#</head>#}
+{#<body>#}
+{#    <form action="/triangle-post/" method="post">#}
+{#        {% csrf_token %}#}
+{#        <input type="text" name="filePath">#}
+{#        <input type="submit">{{ button }}</input>#}
+{#    </form>#}
+{#    <div>#}
+{#        <form enctype="multipart/form-data" action="/traingleCsv_Post/" method="post">#}
+{#            {% csrf_token %}#}
+{#           <input type="file" name="myfile">#}
+{#           <input type="submit" value="upload">#}
+{#        </form>#}
+{#    </div>#}
+{#    <div class="div1">#}
+{#        <table>#}
+{#            <tr><td><b>输入值</b></td></tr>#}
+{#            {% for i in sideLst %}#}
+{#                <tr><td>{{ i }}</td></tr>#}
+{#            {% endfor %}#}
+{#        </table>#}
+{#        <table>#}
+{#            <tr><td><b>预期结果</b></td></tr>#}
+{#            {% for j in expectLst %}#}
+{#                <tr><td>{{ j }}</td></tr>#}
+{#            {% endfor %}#}
+{#        </table>#}
+{#        <table>#}
+{#            <tr><td><b>输出结果</b></td></tr>#}
+{#            {% for k in resultLst %}#}
+{#                <tr><td>{{ k }}</td></tr>#}
+{#            {% endfor %}#}
+{#        </table>#}
+{#    </div>#}
+{#</body>#}
+{#</html>#}

@@ -19,6 +19,7 @@ def loadCsv_Post(request):
         fo.close()
         context['nextDay'] = "upload over!"
         return render(request, 'nextDay.html', context)
+    
 def traingleCsv_Post(request):
     context = {}
     if request.method == "POST":  # 请求方法为POST时，进行处理
