@@ -71,6 +71,7 @@ def triangle_post(request):
 	context['button'] = "check to start"
 	context['sideLst'] = sideLst
 	context['resultLst'] = resultLst
+	context['total'] = len(resultLst)
 	context['expectLst'] = expectLst
 	context['isNotTriPer'] = percentage.count('isNotTri')
 	context['wrongInputPer'] = percentage.count('wrongInput')

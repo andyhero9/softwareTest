@@ -19,7 +19,7 @@
                 plotShadow: false
             };
             var title = {
-                text: '三角形用例测试分析'
+                text: '三角形用例测试分析 \n <b>total: {{ total }}</b>'
             };
             var tooltip = {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -40,13 +40,13 @@
                 data: [
 
                     {
-                        name: '三角形',
+                        name: '三角形 <b>{{ isTriPer }}</b>',
                         y: {{ isTriPer }},
                         sliced: true,
                         selected: true
                     },
-                    ['输入错误', {{ wrongInputPer }}],
-	                ['非三角形', {{ isNotTriPer }}]
+                    ['输入错误 <b>{{ wrongInputPer }}</b>', {{ wrongInputPer }}],
+                    ['非三角形 <b>{{ isNotTriPer }}</b>', {{ isNotTriPer }}]
                 ]
             }];
 
@@ -87,15 +87,31 @@
 	</section>
 </nav>
 
-<div style="padding:20px;">
-	<div class="row" style="max-width:100rem">
-		<div class="large-7 columns">
+<div class="row" style="max-width:100rem; margin-top: 30px;">
+	<div class="large-7 columns" style="border-right:dotted; border-color: #008CBA;border-width: 1px">
+		<h3>测 试</h3>
+		<ul class="side-nav">
+			<li class="divider"></li>
+		</ul>
 
-			<form action="/triangle/" method="post">
-				{% csrf_token %}
-				<input type="text" name="filePath">
-				<input type="submit">
-			</form>
+		<fieldset>
+			<legend>Triangles Testing</legend>
+			<div class="row">
+				<form action="/triangle/" method="post">
+					{% csrf_token %}
+					<div class="large-9 columns">
+						<input type="text" name="filePath">
+					</div>
+					<div class="large-3 columns">
+						<input type="submit" class="button postfix "
+						       style="width: 70%; margin-left: 15%; border-radius: 5px;">
+					</div>
+				</form>
+			</div>
+
+			<ul class="side-nav">
+				<li class="divider"></li>
+			</ul>
 
 			<div class="responsive">
 				{% load mytags %}
@@ -123,10 +139,16 @@
 					</tbody>
 				</table>
 			</div>
-		</div>
-		<div class="large-5 columns">
-			<div id="container" style="width: 500px; height: 400px; margin: 0 auto"></div>
-		</div>
+		</fieldset>
+	</div>
+
+	<div class="large-5 columns">
+		<h3>分 析</h3>
+		<ul class="side-nav">
+			<li class="divider"></li>
+		</ul>
+
+		<div id="container" style="width: 500px; height: 400px; margin: 0 auto"></div>
 	</div>
 </div>
 

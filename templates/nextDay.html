@@ -18,7 +18,7 @@
                 plotShadow: false
             };
             var title = {
-                text: '三角形用例测试分析 \n total: {{ total }}',
+                text: '三角形用例测试分析 \n <b>total: {{ total }}</b>',
             };
             var tooltip = {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -38,12 +38,12 @@
                 name: 'percentage',
                 data: [
                     {
-                        name: '正确用例 <b>{{ trueDate }}<b>',
+                        name: '正确用例 <b>{{ trueDate }}</b>',
                         y: {{ trueDate }},
                         sliced: true,
                         selected: true
                     },
-                    ['错误用例 <b>{{ fakeDate }}<b>', {{ fakeDate }}]
+                    ['错误用例 <b>{{ fakeDate }}</b>', {{ fakeDate }}]
                 ]
             }];
 
@@ -83,52 +83,100 @@
 		</ul>
 	</section>
 </nav>
-<div class="row" style="max-width:100rem">
-	<div class="large-7 columns">
-		<form action="/next-post/" method="post">
-			{% csrf_token %}
-			<input type="text" name="year">年
-			<input type="text" name="month">月
-			<input type="text" name="day">日
-			<input type="submit">
-		</form>
-		<p>{{ nextDay }}</p>
 
+<div class="row" style="max-width:100rem;margin-top: 30px;">
+	<div class="large-7 columns" style="border-right:dotted; border-color: #008CBA;border-width: 1px">
+		<h3>测 试</h3>
+		<ul class="side-nav">
+			<li class="divider"></li>
+		</ul>
+
+		<fieldset>
+			<legend>Individual Date Testing</legend>
+			<div class="row">
+				<form action="/next-post/" method="post">
+					{% csrf_token %}
+					<div class="large-3 columns">
+						<input type="text" name="year" placeholder="年">
+					</div>
+					<div class="large-3 columns">
+						<input type="text" name="month" placeholder="月">
+					</div>
+					<div class="large-3 columns">
+						<input type="text" name="day" placeholder="日">
+					</div>
+					<div class="large-3 columns">
+						<input type="submit" class="button postfix"
+						       style="width: 70%; margin-left: 15%;border-radius: 5px;">
+					</div>
+				</form>
+			</div>
+
+			<ul class="side-nav">
+				<li class="divider"></li>
+			</ul>
+
+			<br>
+			<p>
+				<b>测试结果（下一日期）：</b>
+				<b style="color: #C91623;">{{ nextDay }}</b>
+			</p>
+		</fieldset>
 
 		{#		<form enctype="multipart/form-data" action="/nextCsv-post/" method="post">#}
 		{#			{% csrf_token %}#}
 		{#			<input type="file" name="myfile">#}
 		{#			<input type="submit" value="upload">#}
 		{#		</form>#}
-		<form action="/nextCsv-post/" method="post">
-			{% csrf_token %}
-			<input type="text" name="myFile">
-			<input type="submit">
-		</form>
-		<div class="responsive">
-			<table>
-				<thead>
-				<tr>
+		<fieldset>
+			<legend>CSV Dates Testing</legend>
+			<div class="row">
+				<form action="/nextCsv-post/" method="post">
+					{% csrf_token %}
+					<div class="large-9 columns">
+						<input type="text" name="myFile" placeholder="输入文件">
+					</div>
+					<div class="large-3 columns">
+						<input type="submit" class="button postfix "
+						       style="width: 70%; margin-left: 15%; border-radius: 5px;">
+					</div>
+				</form>
+			</div>
+			<ul class="side-nav">
+				<li class="divider"></li>
+			</ul>
 
-					<th>实际输出</th>
-					{#						<th>City</th>#}
-					{#						<th>Age</th>#}
-					{#						<th>Country</th>#}
-				</tr>
-				</thead>
-
-				<tbody>
-				{% for i in nextDayList %}
+			<div class="responsive">
+				<table>
+					<thead>
 					<tr>
-						<th>{{ i }}</th>
+
+						<th>实际输出</th>
+						{#						<th>City</th>#}
+						{#						<th>Age</th>#}
+						{#						<th>Country</th>#}
 					</tr>
-				{% endfor %}
-				</tbody>
-			</table>
-		</div>
+					</thead>
+
+					<tbody>
+					{% for i in nextDayList %}
+						<tr>
+							<th>{{ i }}</th>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+
+		</fieldset>
 	</div>
 
 	<div class="large-5 columns">
+		<h3>分 析</h3>
+		<ul class="side-nav">
+			<li class="divider"></li>
+		</ul>
+
 		<div id="container" style="width: 500px; height: 400px; margin: 0 auto"></div>
 	</div>
 </div>
