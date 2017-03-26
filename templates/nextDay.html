@@ -123,11 +123,13 @@
 			</p>
 		</fieldset>
 
-		{#		<form enctype="multipart/form-data" action="/nextCsv-post/" method="post">#}
-		{#			{% csrf_token %}#}
-		{#			<input type="file" name="myfile">#}
-		{#			<input type="submit" value="upload">#}
-		{#		</form>#}
+				<form enctype="multipart/form-data" action="/nextCsv-post/" method="post">
+					{% csrf_token %}
+					<input type="file" name="myfile">
+					<input type="submit" value="确定">
+				</form>
+
+
 		<fieldset>
 			<legend>CSV Dates Testing</legend>
 			<div class="row">

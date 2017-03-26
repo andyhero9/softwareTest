@@ -91,8 +91,14 @@ def nextDay_Post(request):
 def nextDay_Post_Csv(request):
     resultLst = []
     percentage = []
-    filePath = str(request.POST["myFile"])
-    csvfile = file(filePath, 'rb')
+    context = {}
+    print 'aaaaaaaaaaaaaaaaa'
+    csvfile = request.FILES.get("myfile", None)
+    if not csvfile:
+        context['nextDay'] = "no files for upload!"
+        return render(request, 'nextDay.html', context)
+    print type(csvfile)
+    print csvfile.name
     csvfile.readline()
     reader = csv.reader(csvfile)
     for line in reader:
@@ -100,7 +106,6 @@ def nextDay_Post_Csv(request):
         month = int(line[1])
         day = int(line[2])
         csv_nextDay(year, month, day, resultLst, percentage)
-    context = {}
     context['nextDayList'] = resultLst
     context['total'] = len(resultLst)
     context['trueDate'] = percentage.count('1')
