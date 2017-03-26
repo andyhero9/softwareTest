@@ -1,35 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+	<title>calendar</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../static/css/foundation.min.css">
+	<script src="../static/js/foundation.min.js"></script>
+	<script src="../static/js/vendor/modernizr.js"></script>
+	<script src="../static/js/vendor/jquery.js"></script>
+	<script src="../static/js/highcharts.src.js"></script>
+
+	<script>
+        $(document).ready(function () {
+            var chart = {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            };
+            var title = {
+                text: '三角形用例测试分析 \n total: {{ total }}',
+            };
+            var tooltip = {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            };
+            var plotOptions = {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            };
+            var series = [{
+                type: 'pie',
+                name: 'percentage',
+                data: [
+                    {
+                        name: '正确用例 <b>{{ trueDate }}<b>',
+                        y: {{ trueDate }},
+                        sliced: true,
+                        selected: true
+                    },
+                    ['错误用例 <b>{{ fakeDate }}<b>', {{ fakeDate }}]
+                ]
+            }];
+
+            var json = {};
+            json.chart = chart;
+            json.title = title;
+            json.tooltip = tooltip;
+            json.series = series;
+            json.plotOptions = plotOptions;
+            $('#container').highcharts(json);
+        });
+	</script>
+
 </head>
+
 <body>
-    <div>
-        <form action="/next-post/" method="post">
-            {% csrf_token %}
-            <input type="text" name="year">年
-            <input type="text" name="month">月
-            <input type="text" name="day">日
-            <input type="submit">
-        </form>
-        <p>{{nextDay}}</p>
-    </div>
-    <div>
-        <form action="/nextCsv-post/" method="post">
-            {% csrf_token %}
-            <input type="submit">
-        </form>
-        {% for i in nextDayList %}
-            <p>{{ i }}</p>
-        {% endfor %}
-    </div>
-    <div>
-        <form enctype="multipart/form-data" action="/uploadFile/" method="post">
-            {% csrf_token %}
-           <input type="file" name="myfile">
-           <input type="submit" value="upload">
-        </form>
-    </div>
+<nav class="top-bar" data-topbar>
+	<ul class="title-area">
+		<li class="name">
+			<h1 style="font-family:Monospace;font-size:1.2em;"><a href="#">S O F T W A R E - T E S T I N G</a></h1>
+		</li>
+		<!-- 小屏幕上折叠按钮: 去掉 .menu-icon 类，可以去除图标。
+  如果需要只显示图片，可以删除 "Menu" 文本 -->
+		<li class="toggle-topbar menu-icon"><a href="#"><span>TEST</span></a></li>
+	</ul>
+
+	<section class="top-bar-section">
+		<ul class="left">
+			<li><a href="index.html">三 角 形</a></li>
+			<li class="divider"></li>
+			<li class="active"><a href="#">下 一 日 期</a></li>
+			<li class="divider"></li>
+			<li><a href="#">推 销 员</a></li>
+			<li class="divider"></li>
+			<li><a href="#">。。。</a></li>
+			<li class="divider"></li>
+		</ul>
+	</section>
+</nav>
+<div class="row" style="max-width:100rem">
+	<div class="large-7 columns">
+		<form action="/next-post/" method="post">
+			{% csrf_token %}
+			<input type="text" name="year">年
+			<input type="text" name="month">月
+			<input type="text" name="day">日
+			<input type="submit">
+		</form>
+		<p>{{ nextDay }}</p>
+
+
+		{#		<form enctype="multipart/form-data" action="/nextCsv-post/" method="post">#}
+		{#			{% csrf_token %}#}
+		{#			<input type="file" name="myfile">#}
+		{#			<input type="submit" value="upload">#}
+		{#		</form>#}
+		<form action="/nextCsv-post/" method="post">
+			{% csrf_token %}
+			<input type="text" name="myFile">
+			<input type="submit">
+		</form>
+		<div class="responsive">
+			<table>
+				<thead>
+				<tr>
+
+					<th>实际输出</th>
+					{#						<th>City</th>#}
+					{#						<th>Age</th>#}
+					{#						<th>Country</th>#}
+				</tr>
+				</thead>
+
+				<tbody>
+				{% for i in nextDayList %}
+					<tr>
+						<th>{{ i }}</th>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="large-5 columns">
+		<div id="container" style="width: 500px; height: 400px; margin: 0 auto"></div>
+	</div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $(document).foundation();
+    })
+
+</script>
 </body>
 </html>

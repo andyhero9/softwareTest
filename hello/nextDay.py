@@ -19,19 +19,22 @@ def nextDay(year,month,day,resultLst):
         result = "年错误"
         resultLst.append(result)
 
-def csv_nextDay(year,month,day,resultLst):
+def csv_nextDay(year,month,day,resultLst, percentage):
     if 1800<=year<=2100:
         if 1<=month<=12:
             if 1<=day<=31:
                 is_valied_date(year, month, day,resultLst)
             else:
                 result = "日错误"
+                percentage.append('1')
                 resultLst.append(result)
         else:
             result = "月错误"
+            percentage.append('1')
             resultLst.append(result)
     else:
         result = "年错误"
+        percentage.append('1')
         resultLst.append(result)
 
 def is_valied_date(year, month, day,resultLst):
@@ -64,17 +67,16 @@ def is_theNextDay(year,month,day,resultLst):
     result = nextDay.isoformat()
     resultLst.append(result)
 
-def readCsv(resultLst):
-    fo = open("E:/Django_project/softwareTest/upload/catalog.txt", "rb")
-    filePath = fo.read();
-    csvfile = file(filePath, 'rb')
-    csvfile.readline()
-    reader = csv.reader(csvfile)
-    for line in reader:
-        year = int(line[0])
-        month = int(line[1])
-        day = int(line[2])
-        csv_nextDay(year, month, day,resultLst)
+# def readCsv(resultLst):
+#     filePath = str(request.POST["myfile"])
+#     csvfile = file(filePath, 'rb')
+#     csvfile.readline()
+#     reader = csv.reader(csvfile)
+#     for line in reader:
+#         year = int(line[0])
+#         month = int(line[1])
+#         day = int(line[2])
+#         csv_nextDay(year, month, day,resultLst)
 
 def nextDay_Post(request):
     year = request.POST["year"]
@@ -88,9 +90,21 @@ def nextDay_Post(request):
 
 def nextDay_Post_Csv(request):
     resultLst = []
-    readCsv(resultLst)
+    percentage = []
+    filePath = str(request.POST["myFile"])
+    csvfile = file(filePath, 'rb')
+    csvfile.readline()
+    reader = csv.reader(csvfile)
+    for line in reader:
+        year = int(line[0])
+        month = int(line[1])
+        day = int(line[2])
+        csv_nextDay(year, month, day, resultLst, percentage)
     context = {}
     context['nextDayList'] = resultLst
+    context['total'] = len(resultLst)
+    context['trueDate'] = percentage.count('1')
+    context['fakeDate'] = len(resultLst) - percentage.count('1')
     return render(request, 'nextDay.html', context)
 
 def nextDay_Get(request):
