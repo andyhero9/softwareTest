@@ -10,6 +10,58 @@
 	<script src="../static/js/vendor/modernizr.js"></script>
 	<script src="../static/js/vendor/jquery.js"></script>
 	<script src="../static/js/highcharts.src.js"></script>
+	<script>
+
+        $(document).ready(function () {
+            var chart = {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            };
+            var title = {
+                text: '三角形用例测试分析'
+            };
+            var tooltip = {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            };
+            var plotOptions = {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            };
+            var series = [{
+                type: 'pie',
+                name: 'percentage',
+                data: [
+
+                    {
+                        name: '三角形',
+                        y: {{ isTriPer }},
+                        sliced: true,
+                        selected: true
+                    },
+                    ['输入错误', {{ wrongInputPer }}],
+	                ['非三角形', {{ isNotTriPer }}]
+                ]
+            }];
+
+            var json = {};
+            json.chart = chart;
+            json.title = title;
+            json.tooltip = tooltip;
+            json.series = series;
+            json.plotOptions = plotOptions;
+            $('#container').highcharts(json);
+        });
+
+
+	</script>
+
 </head>
 
 <body>
@@ -40,7 +92,6 @@
 <div style="padding:20px;">
 	<div class="row" style="max-width:100rem">
 		<div class="large-7 columns">
-			<h2>响应式表格</h2>
 
 			<form action="/triangle/" method="post">
 				{% csrf_token %}
@@ -48,89 +99,39 @@
 				<input type="submit">
 			</form>
 
-			<div class="div1">
-				<table>
-					<tr>
-						<td><b>输入值</b></td>
-					</tr>
-					{% for i in sideLst %}
-						<tr>
-							<td>{{ i }}</td>
-						</tr>
-					{% endfor %}
-				</table>
-				<table>
-					<tr>
-						<td><b>预期结果</b></td>
-					</tr>
-					{% for j in expectLst %}
-						<tr>
-							<td>{{ j }}</td>
-						</tr>
-					{% endfor %}
-				</table>
-				<table>
-					<tr>
-						<td><b>输出结果</b></td>
-					</tr>
-					{% for k in resultLst %}
-						<tr>
-							<td>{{ k }}</td>
-						</tr>
-					{% endfor %}
-				</table>
-			</div>
-
-
 			<div class="responsive">
+				{% load mytags %}
+				{% load mytags2 %}
 				<table>
 					<thead>
 					<tr>
-						<th>Firstname</th>
-						<th>Lastname</th>
-						<th>Email</th>
-						<th>City</th>
-						<th>Age</th>
-						<th>Country</th>
+						<th>输入（a，b，c）</th>
+						<th>预期输出</th>
+						<th>实际输出</th>
+						{#						<th>City</th>#}
+						{#						<th>Age</th>#}
+						{#						<th>Country</th>#}
 					</tr>
 					</thead>
+
 					<tbody>
-					<tr>
-						<td>John</td>
-						<td>Doe</td>
-						<td>john@example.com</td>
-						<td>New York</td>
-						<td>35</td>
-						<td>USA</td>
-					</tr>
-					<tr>
-						<td>Mary</td>
-						<td>Moe</td>
-						<td>mary@example.com</td>
-						<td>Chicago</td>
-						<td>51</td>
-						<td>USA</td>
-					</tr>
-					<tr>
-						<td>July</td>
-						<td>Dooley</td>
-						<td>july@example.com</td>
-						<td>San Francisco</td>
-						<td>38</td>
-						<td>USA</td>
-					</tr>
+					{% for i in sideLst %}
+						<tr>
+							<td>{{ i }}</td>
+							<td>{{ expectLst|qwer1 }}</td>
+							<td>{{ resultLst|qwer2 }}</td>
+						</tr>
+					{% endfor %}
 					</tbody>
 				</table>
 			</div>
 		</div>
-		<div class="large-5 columns">.small-4 .large-3 orange
-			<div id="container5" style="width: 500px; height: 400px; margin: 0 auto"></div>
+		<div class="large-5 columns">
+			<div id="container" style="width: 500px; height: 400px; margin: 0 auto"></div>
 		</div>
 	</div>
 </div>
 
-
-<script src="../static/js/myjs.js"></script>
 
 <script>
     $(document).ready(function () {
