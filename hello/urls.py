@@ -27,4 +27,5 @@ urlpatterns = [
 	url(r'^next/', nextDay.nextDay_Get),
 	url(r'^next-post/', nextDay.nextDay_Post),
 	url(r'^nextCsv-post/', nextDay.nextDay_Post_Csv),
+	url(r'^triangle_input/',triangle.triangle_input)
 ]

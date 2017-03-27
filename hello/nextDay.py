@@ -89,15 +89,18 @@ def nextDay_Post(request):
 	month = request.POST["month"]
 	day = request.POST["day"]
 	resultLst = ['error']
+	nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 	nextDay(year, month, day, resultLst)
 	context = {}
 	context['nextDay'] = resultLst[1]
+	context['time'] = nowTime
 	return render(request, 'nextDay.html', context)
 
 
 def nextDay_Post_Csv(request):
 	resultLst = []
 	percentage = []
+	timeLst = []
 	print 'aaaaaaaaaaaaaaaaa'
 	
 	context = {}
@@ -129,6 +132,8 @@ def nextDay_Post_Csv(request):
 		month = int(line[1])
 		day = int(line[2])
 		csv_nextDay(year, month, day, resultLst, percentage)
+		nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+		timeLst.append(nowTime)
 	
 	context['nextDayList'] = resultLst
 	context['total'] = len(resultLst)

@@ -2,6 +2,7 @@
 from django.shortcuts import render
 import csv
 import os
+import datetime
 
 
 def isTriangle(a, b, c, resultLst, percentage):
@@ -79,6 +80,7 @@ def triangle_post(request):
 	resultLst = []
 	percentage = []
 	expectLst = []
+	timeLst = []
 	for line in reader:
 		a = line[0]
 		b = line[1]
@@ -87,6 +89,8 @@ def triangle_post(request):
 		expectLst.append(eLst)
 		a, b, c = map(int, (a, b, c))
 		isTriangle(a, b, c, resultLst, percentage)
+		nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+		timeLst.append(nowTime)
 		side = str(a) + ',' + str(b) + ',' + str(c)
 		sideLst.append(side)
 		
@@ -94,6 +98,7 @@ def triangle_post(request):
 	context['resultLst'] = resultLst
 	context['total'] = len(resultLst)
 	context['expectLst'] = expectLst
+	context['timeLst'] = timeLst
 	context['isNotTriPer'] = percentage.count('isNotTri')
 	context['wrongInputPer'] = percentage.count('wrongInput')
 	context['isTriPer'] = percentage.count('isTri')
@@ -103,3 +108,15 @@ def triangle_post(request):
 	# 	context = {}
 	# 	context['button'] = "check to start"
 	# 	return render(request, 'triangle.html', context)
+
+def triangle_input(request):
+	a = request.POST["a"]
+	b = request.POST["b"]
+	c = request.POST["c"]
+	resultLst=['error']
+	percentage=[]
+	isTriangle(a, b, c, resultLst, percentage)
+	nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+	context = {}
+	context['resultLst'] = resultLst[1]
+	context['time'] = nowTime
