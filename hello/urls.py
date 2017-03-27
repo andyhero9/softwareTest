@@ -15,17 +15,20 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from . import triangle, index, nextDay, calendar
+from hello import triangle, index, nextDay, views
+import hello
 
 urlpatterns = [
 	url(r'^admin/', admin.site.urls),
 	url(r'^index/', index.index),
-	url(r'^index.html/', index.index),
+	# url(r'^index.html/', index.index),
 	url(r'^triangle/', triangle.triangle_post),
-	url(r'^calendar.html/', calendar.calendar),
+	# url(r'^calendar.html/', calendar.calendar),
 	# url(r'^triangle-post/', triangle.triangle_post),
 	url(r'^next/', nextDay.nextDay_Get),
 	url(r'^next-post/', nextDay.nextDay_Post),
 	url(r'^nextCsv-post/', nextDay.nextDay_Post_Csv),
-	url(r'^triangle_input/',triangle.triangle_input)
+	url(r'^triangle_input/', triangle.triangle_input),
+	url(r'^toIndex/$', hello.views.toIndex, name='toIndex'),
+	url(r'^toNextday/$', hello.views.toNextDay, name='toNextDay')
 ]

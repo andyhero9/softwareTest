@@ -84,8 +84,13 @@
       <file leaf-file-name="nextDay.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hello/nextDay.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="116">
               <caret line="90" column="25" lean-forward="true" selection-start-line="90" selection-start-column="25" selection-end-line="90" selection-end-column="25" />
+=======
+            <state relative-caret-position="-80">
+              <caret line="103" column="4" lean-forward="true" selection-start-line="103" selection-start-column="4" selection-end-line="103" selection-end-column="4" />
+>>>>>>> Stashed changes
               <folding>
                 <element signature="e#24#59#0" expanded="true" />
                 <element signature="e#152#446#0" expanded="false" />
@@ -1138,8 +1143,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hello/nextDay.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="116">
           <caret line="90" column="25" lean-forward="true" selection-start-line="90" selection-start-column="25" selection-end-line="90" selection-end-column="25" />
+=======
+        <state relative-caret-position="-80">
+          <caret line="103" column="4" lean-forward="true" selection-start-line="103" selection-start-column="4" selection-end-line="103" selection-end-column="4" />
+>>>>>>> Stashed changes
           <folding>
             <element signature="e#24#59#0" expanded="true" />
             <element signature="e#152#446#0" expanded="false" />

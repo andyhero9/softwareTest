@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
 	<title>calendar</title>
 	<meta charset="utf-8">
@@ -72,7 +72,7 @@
 
 	<section class="top-bar-section">
 		<ul class="left">
-			<li><a href="index.html">三 角 形</a></li>
+			<li><a href="{% url 'toIndex'%}">三 角 形</a></li>
 			<li class="divider"></li>
 			<li class="active"><a href="#">下 一 日 期</a></li>
 			<li class="divider"></li>
@@ -153,16 +153,17 @@
 					<tr>
 
 						<th>实际输出</th>
-						{#						<th>City</th>#}
+						<th>测试时间</th>
 						{#						<th>Age</th>#}
 						{#						<th>Country</th>#}
 					</tr>
 					</thead>
-
+					{% load mytags %}
 					<tbody>
 					{% for i in nextDayList %}
 						<tr>
 							<th>{{ i }}</th>
+							<th>{{ timeLst|qwer1 }}</th>
 						</tr>
 					{% endfor %}
 					</tbody>
