@@ -40,13 +40,14 @@
                 data: [
 
                     {
-                        name: 'x < 1000 <b>{{ low }}</b>',
-                        y: {{ isTriPer }},
+                        name: '"x < 1000" <b>{{ low }}</b>',
+                        y: {{ low }},
                         sliced: true,
                         selected: true
                     },
-                    ['1000 <= x < 1800 <b>{{ wrongInputPer }}</b>', {{ wrongInputPer }}],
-                    ['非三角形 <b>{{ isNotTriPer }}</b>', {{ isNotTriPer }}]
+                    ['"1000 <= x < 1800" <b>{{ medium }}</b>', {{ medium }}],
+                    ['"x => 1800" <b>{{ high }}</b>', {{ high }}],
+	                ['"错误用例" <b>{{ wrongInput }}</b>', {{ wrongInput }}]
                 ]
             }];
 
@@ -121,7 +122,7 @@
 			</ul>
 
 			<p>
-				<b>测试结果： </b>
+				<b>测试结果（佣金提成）： </b>
 				<b style="color: #C91623;">{{ reward }}</b>
 			</p>
 		</fieldset>
@@ -163,7 +164,7 @@
 				<table>
 					<thead>
 					<tr>
-						<th>输入用例（a，b，c）</th>
+						<th>输入用例（外设，主机，显示器）</th>
 						<th>预期输出</th>
 						<th>实际输出</th>
 						<th>测试时间</th>
@@ -175,7 +176,7 @@
 						<tr>
 							<td>{{ i }}</td>
 							<td>{{ expectLst|qwer1 }}</td>
-							<td>{{ reward|qwer2 }}</td>
+							<td>{{ resultLst|qwer2 }}</td>
 							<td>{{ timeLst|qwer3 }}</td>
 						</tr>
 					{% endfor %}

@@ -36,15 +36,15 @@ def csv_Num(x, y, z, resultLst):
 				total_Sales(x, y, z, resultLst)
 			else:
 				result = "显示器数量错误"
-				output.a = output.d + 1
+				output.d = output.d + 1
 				resultLst.append(result)
 		else:
 			result = "主机数量错误"
-			output.a = output.d + 1
+			output.d = output.d + 1
 			resultLst.append(result)
 	else:
 		result = "外设数量错误"
-		output.a = output.d + 1
+		output.d = output.d + 1
 		resultLst.append(result)
 
 
@@ -54,13 +54,13 @@ def total_Sales(x, y, z, resultLst):
 	total = x * 25 + y * 45 + z * 30
 	if total < 1000:
 		reward = total * 0.05
-		output.a
+		output.a = output.a + 1
 	elif 1000 <= total < 1800:
 		reward = (total - 1000) * 0.1 + 50
-		output.b
+		output.b = output.c + 1
 	elif 1800 <= total:
 		reward = (total - 1800) * 0.15 + 80 + 50
-		output.c
+		output.c = output.c + 1
 	# print "reward:",reward
 	result = reward
 	resultLst.append(result)
@@ -103,7 +103,8 @@ def csv_sales_Post(request):
 		inputNum = ','.join([str(x), str(y), str(z)])
 		inputLst.append(inputNum)
 		expectLst.append(line[3])
-	context['reward'] = resultLst
+		
+	context['resultLst'] = resultLst
 	context['inputLst'] = inputLst
 	context['expectLst'] = expectLst
 	context['timeLst'] = timeLst
