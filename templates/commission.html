@@ -19,7 +19,7 @@
                 plotShadow: false
             };
             var title = {
-                text: '三角形用例测试分析 \n <b>total: {{ total }}</b>'
+                text: '佣金问题用例测试分析 \n <b>total: {{ total }}</b>'
             };
             var tooltip = {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -40,12 +40,12 @@
                 data: [
 
                     {
-                        name: '三角形 <b>{{ isTriPer }}</b>',
+                        name: 'x < 1000 <b>{{ low }}</b>',
                         y: {{ isTriPer }},
                         sliced: true,
                         selected: true
                     },
-                    ['输入错误 <b>{{ wrongInputPer }}</b>', {{ wrongInputPer }}],
+                    ['1000 <= x < 1800 <b>{{ wrongInputPer }}</b>', {{ wrongInputPer }}],
                     ['非三角形 <b>{{ isNotTriPer }}</b>', {{ isNotTriPer }}]
                 ]
             }];
