@@ -96,7 +96,7 @@ def triangle_post(request):
 	context['isNotTriPer'] = percentage.count('isNotTri')
 	context['wrongInputPer'] = percentage.count('wrongInput')
 	context['isTriPer'] = percentage.count('isTri')
-	print(percentage)
+	#print(percentage)
 	return render(request, 'index.html', context)  #
 	# def triangle(request):
 	# 	context = {}
@@ -135,6 +135,6 @@ def triangle_input(request):
 	
 	context = {}
 	context['result'] = result
-	print result
+	#print result
 	# context['time'] = nowTime
 	return render(request, 'index.html', context)
