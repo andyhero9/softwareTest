@@ -85,16 +85,25 @@ def is_theNextDay(year, month, day, resultLst):
 #         csv_nextDay(year, month, day,resultLst)
 
 def nextDay_Post(request):
-	year = request.POST["year"]
-	month = request.POST["month"]
-	day = request.POST["day"]
-	resultLst = ['error']
-	# nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-	nextDay(year, month, day, resultLst)
-	context = {}
-	context['nextDay'] = resultLst[1]
-	# context['time'] = nowTime
-	return render(request, 'nextDay.html', context)
+	try:
+		int(request.POST["year"])
+		int(request.POST["month"])
+		int(request.POST["day"])
+		year = request.POST["year"]
+		month = request.POST["month"]
+		day = request.POST["day"]
+		resultLst = ['error']
+		# nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+		nextDay(year, month, day, resultLst)
+		context = {}
+		context['nextDay'] = resultLst[1]
+		# context['time'] = nowTime
+		return render(request, 'nextDay.html', context)
+	except:
+		context = {}
+		context['nextDay'] = "输入有误"
+		# context['time'] = nowTime
+		return render(request, 'nextDay.html', context)
 
 
 def nextDay_Post_Csv(request):

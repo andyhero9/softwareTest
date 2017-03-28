@@ -104,37 +104,48 @@ def triangle_post(request):
 	# 	return render(request, 'triangle.html', context)
 
 def triangle_input(request):
-	a = int(request.POST["a"])
-	b = int(request.POST["b"])
-	c = int(request.POST["c"])
-	# print type(a),b,c
+	try:
+		int(request.POST["a"])
+		int(request.POST["c"])
+		int(request.POST["c"])
+		a = int(request.POST["a"])
+		b = int(request.POST["b"])
+		c = int(request.POST["c"])
+		# print type(a),b,c
 
-	side = sorted([a, b, c])
-	if 1 <= a <= 100 and 1 <= b <= 100 and 1 <= c <= 100:
-		if side[0] + side[1] > side[2]:
-			if a == b and b == c:
-				# print "等边三角形"
-				result = "等边三角形"
-			else:
-				if a == b or a == c or b == c:
-					result = "等腰三角形"
+		side = sorted([a, b, c])
+		if 1 <= a <= 100 and 1 <= b <= 100 and 1 <= c <= 100:
+			if side[0] + side[1] > side[2]:
+				if a == b and b == c:
+					# print "等边三角形"
+					result = "等边三角形"
 				else:
-					if a * a + b * b == c * c or a * a + c * c == b * b or b * b + c * c == a * a:
-						# print "直角三角形"
-						result = "直角三角形"
+					if a == b or a == c or b == c:
+						result = "等腰三角形"
 					else:
-						# print "一般三角形"
-						result = "一般三角形"
+						if a * a + b * b == c * c or a * a + c * c == b * b or b * b + c * c == a * a:
+							# print "直角三角形"
+							result = "直角三角形"
+						else:
+							# print "一般三角形"
+							result = "一般三角形"
+			else:
+				# print "不是三角形"
+				result = "不是三角形"
 		else:
-			# print "不是三角形"
-			result = "不是三角形"
-	else:
-		# print "输入数值有误(1<=a,b,c<=100)"
-		result = "输入数值有误(1<=a,b,c<=100)"
-	# nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-	
-	context = {}
-	context['result'] = result
-	#print result
-	# context['time'] = nowTime
-	return render(request, 'index.html', context)
+			# print "输入数值有误(1<=a,b,c<=100)"
+			result = "输入数值有误(1<=a,b,c<=100)"
+		# nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+		context = {}
+		context['result'] = result
+		#print result
+		# context['time'] = nowTime
+		return render(request, 'index.html', context)
+
+	except:
+		context = {}
+		context['result'] = "输入有误"
+		# print result
+		# context['time'] = nowTime
+		return render(request, 'index.html', context)

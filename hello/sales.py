@@ -121,12 +121,21 @@ def sales(request):
 
 
 def sales_Post(request):
-	x = int(request.POST["x"])
-	y = int(request.POST["y"])
-	z = int(request.POST["z"])
-	resultLst = ['error']
-	input_Num(x, y, z, resultLst)
-	context = {}
-	context['reward'] = resultLst[1]
-	# context['time'] = nowTime
-	return render(request, 'commission.html', context)
+	try:
+		int(request.POST["x"])
+		int(request.POST["y"])
+		int(request.POST["z"])
+		x = int(request.POST["x"])
+		y = int(request.POST["y"])
+		z = int(request.POST["z"])
+		resultLst = ['error']
+		input_Num(x, y, z, resultLst)
+		context = {}
+		context['reward'] = resultLst[1]
+		# context['time'] = nowTime
+		return render(request, 'commission.html', context)
+	except:
+		context = {}
+		context['reward'] = "错误输入"
+		# context['time'] = nowTime
+		return render(request, 'commission.html', context)
