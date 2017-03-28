@@ -63,7 +63,7 @@
 <nav class="top-bar" data-topbar>
 	<ul class="title-area">
 		<li class="name">
-			<h1 style="font-family:Monospace;font-size:1.2em;"><a href="#">S O F T W A R E - T E S T I N G</a></h1>
+			<h1 style="font-family:Monospace;font-size:1.2em;"><a href="#">S O F T W A R E - T E S T I N G &nbsp</a></h1>
 		</li>
 		<!-- 小屏幕上折叠按钮: 去掉 .menu-icon 类，可以去除图标。
   如果需要只显示图片，可以删除 "Menu" 文本 -->
@@ -92,7 +92,7 @@
 		</ul>
 
 		<fieldset>
-			<legend>Individual Date Testing</legend>
+			<legend>Individual Input Testing</legend>
 			<div class="row">
 				<form action="/next-post/" method="post">
 					{% csrf_token %}
@@ -151,7 +151,8 @@
 				<table>
 					<thead>
 					<tr>
-
+						<th>输入用例</th>
+						<th>预计输出</th>
 						<th>实际输出</th>
 						<th>测试时间</th>
 						{#						<th>Age</th>#}
@@ -159,11 +160,15 @@
 					</tr>
 					</thead>
 					{% load mytags %}
+					{% load mytags2 %}
+					{% load mytags3 %}
 					<tbody>
-					{% for i in nextDayList %}
+					{% for i in inputLst %}
 						<tr>
 							<th>{{ i }}</th>
-							<th>{{ timeLst|qwer1 }}</th>
+							<th>{{ expectLst|qwer1 }}</th>
+							<th>{{ nextDayLst|qwer2 }}</th>
+							<th>{{ timeLst|qwer3 }}</th>
 						</tr>
 					{% endfor %}
 					</tbody>

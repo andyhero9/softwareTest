@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from hello import triangle, index, nextDay, views
+from hello import triangle, index, nextDay, views, sales
 import hello
 
 urlpatterns = [
@@ -29,6 +29,8 @@ urlpatterns = [
 	url(r'^next-post/', nextDay.nextDay_Post),
 	url(r'^nextCsv-post/', nextDay.nextDay_Post_Csv),
 	url(r'^triangle_input/', triangle.triangle_input),
+	url(r'^sale_input/', sales.sales_Post),
+	url(r'^sales/', sales.csv_sales_Post),
 	url(r'^toIndex/$', hello.views.toIndex, name='toIndex'),
 	url(r'^toNextday/$', hello.views.toNextDay, name='toNextDay'),
 	url(r'^toCommission/$', hello.views.toCommission, name='toCommission')

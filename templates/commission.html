@@ -66,7 +66,7 @@
 <nav class="top-bar" data-topbar>
 	<ul class="title-area">
 		<li class="name">
-			<h1 style="font-family:Monospace;font-size:1.2em;"><a href="#">S O F T W A R E - T E S T I N G</a></h1>
+			<h1 style="font-family:Monospace;font-size:1.2em;"><a href="#">S O F T W A R E - T E S T I N G &nbsp</a></h1>
 		</li>
 		<!-- 小屏幕上折叠按钮: 去掉 .menu-icon 类，可以去除图标。
   如果需要只显示图片，可以删除 "Menu" 文本 -->
@@ -98,16 +98,16 @@
 		<fieldset>
 			<legend>Individual Input Testing</legend>
 			<div class="row">
-				<form action="/triangle_input/" method="post">
+				<form action="/sale_input/" method="post">
 					{% csrf_token %}
 					<div class="large-3 columns">
-						<input type="text" name="a" placeholder="a">
+						<input type="text" name="x" placeholder="外设">
 					</div>
 					<div class="large-3 columns">
-						<input type="text" name="b" placeholder="b">
+						<input type="text" name="y" placeholder="主机">
 					</div>
 					<div class="large-3 columns">
-						<input type="text" name="c" placeholder="c">
+						<input type="text" name="z" placeholder="显示器">
 					</div>
 					<div class="large-3 columns">
 						<input type="submit" class="button postfix"
@@ -122,7 +122,7 @@
 
 			<p>
 				<b>测试结果： </b>
-				<b style="color: #C91623;">{{ result }}</b>
+				<b style="color: #C91623;">{{ reward }}</b>
 			</p>
 		</fieldset>
 
@@ -131,10 +131,10 @@
 		</ul>
 
 		<fieldset>
-			<legend>Triangles Testing</legend>
+			<legend>CSV Input Testing</legend>
 			<div class="row">
 
-				<form enctype="multipart/form-data" action="/triangle/" method="post">
+				<form enctype="multipart/form-data" action="/sales/" method="post">
 					{% csrf_token %}
 					<div class="large-6 columns">
 						<input type="file" name="myFile" placeholder="上传文件" class="button postfix"
@@ -163,7 +163,7 @@
 				<table>
 					<thead>
 					<tr>
-						<th>输入（a，b，c）</th>
+						<th>输入用例（a，b，c）</th>
 						<th>预期输出</th>
 						<th>实际输出</th>
 						<th>测试时间</th>
@@ -171,11 +171,11 @@
 					</thead>
 
 					<tbody>
-					{% for i in sideLst %}
+					{% for i in inputLst %}
 						<tr>
 							<td>{{ i }}</td>
 							<td>{{ expectLst|qwer1 }}</td>
-							<td>{{ resultLst|qwer2 }}</td>
+							<td>{{ reward|qwer2 }}</td>
 							<td>{{ timeLst|qwer3 }}</td>
 						</tr>
 					{% endfor %}

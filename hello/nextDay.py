@@ -140,7 +140,7 @@ def nextDay_Post_Csv(request):
 		nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 		timeLst.append(nowTime)
 	
-	context['nextDayList'] = resultLst
+	context['nextDayLst'] = resultLst
 	context['inputLst'] = inputLst
 	context['expectLst'] = expectLst
 	context['timeLst'] = timeLst
