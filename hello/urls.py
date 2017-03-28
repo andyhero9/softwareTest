@@ -30,5 +30,6 @@ urlpatterns = [
 	url(r'^nextCsv-post/', nextDay.nextDay_Post_Csv),
 	url(r'^triangle_input/', triangle.triangle_input),
 	url(r'^toIndex/$', hello.views.toIndex, name='toIndex'),
-	url(r'^toNextday/$', hello.views.toNextDay, name='toNextDay')
+	url(r'^toNextday/$', hello.views.toNextDay, name='toNextDay'),
+	url(r'^toCommission/$', hello.views.toCommission, name='toCommission')
 ]
