@@ -151,10 +151,10 @@
 				<table>
 					<thead>
 					<tr>
-						<th>输入用例（年-月-日）</th>
-						<th>预计输出</th>
-						<th>实际输出</th>
-						<th>测试时间</th>
+						<th style="text-align: center">输入用例（年-月-日）</th>
+						<th style="text-align: center">预计输出</th>
+						<th style="text-align: center">实际输出</th>
+						<th style="text-align: center">测试时间</th>
 						{#						<th>Age</th>#}
 						{#						<th>Country</th>#}
 					</tr>
@@ -165,10 +165,10 @@
 					<tbody>
 					{% for i in inputLst %}
 						<tr>
-							<th>{{ i }}</th>
-							<th>{{ expectLst|qwer11 }}</th>
-							<th>{{ nextDayLst|qwer22 }}</th>
-							<th>{{ timeLst|qwer33 }}</th>
+							<td>{{ i }}</td>
+							<td>{{ expectLst|qwer11 }}</td>
+							<td>{{ nextDayLst|qwer22 }}</td>
+							<td>{{ timeLst|qwer33 }}</td>
 						</tr>
 					{% endfor %}
 					</tbody>

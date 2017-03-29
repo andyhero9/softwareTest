@@ -6,11 +6,14 @@ import datetime
 
 
 class output:
+	def __init__(self):
+		pass
+	
 	a = 0
 	b = 0
 	c = 0
 	d = 0
-
+	
 
 def input_Num(x, y, z, resultLst):
 	if 1 <= x <= 90:
@@ -57,7 +60,7 @@ def total_Sales(x, y, z, resultLst):
 		output.a = output.a + 1
 	elif 1000 <= total < 1800:
 		reward = (total - 1000) * 0.1 + 50
-		output.b = output.c + 1
+		output.b = output.b + 1
 	elif 1800 <= total:
 		reward = (total - 1800) * 0.15 + 80 + 50
 		output.c = output.c + 1
@@ -103,7 +106,7 @@ def csv_sales_Post(request):
 		inputNum = ','.join([str(x), str(y), str(z)])
 		inputLst.append(inputNum)
 		expectLst.append(line[3])
-		
+	
 	context['resultLst'] = resultLst
 	context['inputLst'] = inputLst
 	context['expectLst'] = expectLst
@@ -113,6 +116,10 @@ def csv_sales_Post(request):
 	context['low'] = output.a
 	context['medium'] = output.b
 	context['high'] = output.c
+	output.a = 0
+	output.b = 0
+	output.c = 0
+	output.d = 0
 	return render(request, 'commission.html', context)
 
 
