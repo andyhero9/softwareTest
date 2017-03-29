@@ -76,7 +76,7 @@
 
 	<section class="top-bar-section">
 		<ul class="left">
-			<li class="{% url 'toIndex'%}"><a href="">三 角 形</a></li>
+			<li><a href="{% url 'toIndex'%}">三 角 形</a></li>
 			<li class="divider"></li>
 			<li><a href="{% url 'toNextDay'%}">下 一 日 期</a></li>
 			<li class="divider"></li>
@@ -175,9 +175,9 @@
 					{% for i in inputLst %}
 						<tr>
 							<td>{{ i }}</td>
-							<td>{{ expectLst|qwer1 }}</td>
-							<td>{{ resultLst|qwer2 }}</td>
-							<td>{{ timeLst|qwer3 }}</td>
+							<td>{{ expectLst|qwer111 }}</td>
+							<td>{{ resultLst|qwer222 }}</td>
+							<td>{{ timeLst|qwer333 }}</td>
 						</tr>
 					{% endfor %}
 					</tbody>
@@ -192,7 +192,7 @@
 			<li class="divider"></li>
 		</ul>
 
-		<div id="container" style="width: 500px; height: 400px; margin: 0 auto"></div>
+		<div id="container" style="height: 400px; margin: 0"></div>
 	</div>
 </div>
 
