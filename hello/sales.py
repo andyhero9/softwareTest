@@ -146,3 +146,67 @@ def sales_Post(request):
 		context['reward'] = "错误输入"
 		# context['time'] = nowTime
 		return render(request, 'commission.html', context)
+
+def reward_Post(request):
+    resultLst = []
+    total = int(request.POST["reward"])
+    context={}
+    if 100<=total<7800:
+        for i in range(1, 91):
+            x = total - i * 25
+            if (x >= 75):
+                for j in range(1, 71):
+                    y = total - i * 25 - j * 45
+                    if (y >= 30):
+                        for k in range(1, 81):
+                            z = (total - i * 25 - j * 45)
+                            # print "z",z%30
+                            if z % 30 == 0 and i * 25 + j * 45 + k * 30 == total:
+                                result = ",".join([str(i), str(j), str(k), str(total)])
+                                resultLst.append(result)
+
+
+        with open('../softwareTest/upload/result001.csv', 'wb') as csvfiles:
+            spamwriter = csv.writer(csvfiles, dialect='excel')
+            spamwriter.writerow(['x', 'y', 'z', 'e'])
+            for line in resultLst:
+                spamwriter.writerow([line.split(",")[0], line.split(",")[1], line.split(",")[2], line.split(",")[3]])
+            csvfiles.close()
+
+        csvfile = file('../softwareTest/upload/result001.csv', 'rb')
+        csvfile.readline()
+        reader = csv.reader(csvfile)
+        resultLst = []
+        expectLst = []
+        inputLst = []
+        timeLst = []
+        for line in reader:
+            x = int(line[0])
+            y = int(line[1])
+            z = int(line[2])
+            csv_Num(x, y, z, resultLst)
+            nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            timeLst.append(nowTime)
+            inputNum = ','.join([str(x), str(y), str(z)])
+            inputLst.append(inputNum)
+            expectLst.append(line[3])
+
+        context['resultLst'] = resultLst
+        context['inputLst'] = inputLst
+        context['expectLst'] = expectLst
+        context['timeLst'] = timeLst
+        context['total'] = len(inputLst)
+        context['wrongInput'] = output.d
+        context['low'] = output.a
+        context['medium'] = output.b
+        context['high'] = output.c
+        output.a = 0
+        output.b = 0
+        output.c = 0
+        output.d = 0
+        return render(request, 'commission.html', context)
+    else:
+        context = {}
+        context['reward'] = "错误金额"
+        # context['time'] = nowTime
+        return render(request, 'commission.html', context)

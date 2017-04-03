@@ -50,23 +50,26 @@ def triangle_post(request):
 	if not myfile:
 		context['isUploaded'] = "no files for upload!"
 	# return render(request, 'triangle.html', context)
-	
+
 	destination = open(os.path.join("../softwareTest/upload", myfile.name), 'wb+')  # 打开特定的文件进行二进制的写操作
+
 	for chunk in myfile.chunks():  # 分块写入文件
 		destination.write(chunk)
 	destination.close()
-	
+
 	filePath = ''.join(["../softwareTest/upload/", myfile.name])
 	fo = open("../softwareTest/upload/catalog.txt", "wb")
+	#filePath = ''.join(['upload', myfile.name])
+	#fo = open('upload/catalog.txt', "wb")
 	fo.write(filePath)
 	fo.close()
 	context['isUploaded'] = "upload over!"
 
 
 	# return render(request, 'triangle.html', context)
-	
+
 	# filePath = str(request.POST["filePath"])
-	
+
 	csvfile = file(filePath, 'rb')
 	csvfile.readline()
 	reader = csv.reader(csvfile)
@@ -87,7 +90,7 @@ def triangle_post(request):
 		timeLst.append(nowTime)
 		side = str(a) + ',' + str(b) + ',' + str(c)
 		sideLst.append(side)
-		
+
 	context['sideLst'] = sideLst
 	context['resultLst'] = resultLst
 	context['total'] = len(resultLst)

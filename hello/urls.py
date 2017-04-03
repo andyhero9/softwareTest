@@ -17,6 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from hello import triangle, index, nextDay, views, sales
 import hello
+import settings
 
 urlpatterns = [
 	url(r'^admin/', admin.site.urls),
@@ -34,4 +35,6 @@ urlpatterns = [
 	url(r'^toIndex/$', hello.views.toIndex, name='toIndex'),
 	url(r'^toNextday/$', hello.views.toNextDay, name='toNextDay'),
 	url(r'^toCommission/$', hello.views.toCommission, name='toCommission')
+
+	#(r'^static/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.STATIC_PATH})
 ]

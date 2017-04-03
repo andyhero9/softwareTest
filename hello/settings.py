@@ -123,3 +123,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(os.path.dirname(__file__), '../static/').replace('\\','/'),
 )
+
+MEDIA_ROOT=os.path.join(BASE_DIR, 'upload')
+MEDIA_URL = 'E:/Django_project/softwareTest/upload/'

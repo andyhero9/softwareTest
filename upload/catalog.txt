@@ -1,1 +1,1 @@
-../softwareTest/upload/sales.csv
+../softwareTest/upload/triangle.csv
