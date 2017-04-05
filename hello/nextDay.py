@@ -138,17 +138,20 @@ def nextDay_Post_Csv(request):
 	reader = csv.reader(csvfile)
 	expectLst = []
 	inputLst=[]
+	numberLst=[]
 	for line in reader:
-		year = int(line[0])
-		month = int(line[1])
-		day = int(line[2])
+		numberLst.append(line[0])
+		year = int(line[1])
+		month = int(line[2])
+		day = int(line[3])
 		ndate = '-'.join([str(year), str(month), str(day)])
 		inputLst.append(ndate)
-		expectLst.append(line[3])
+		expectLst.append(line[4])
 		csv_nextDay(year, month, day, resultLst, percentage)
 		nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 		timeLst.append(nowTime)
-	
+
+	context['number'] = numberLst
 	context['nextDayLst'] = resultLst
 	context['inputLst'] = inputLst
 	context['expectLst'] = expectLst

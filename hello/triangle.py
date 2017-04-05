@@ -45,66 +45,69 @@ def isTriangle(a, b, c, resultLst, percentage):
 
 
 def triangle_post(request):
-	context = {}
-	myfile = request.FILES.get("myFile", None)  # 获取上传的文件，如果没有文件，则默认为None
-	if not myfile:
-		context['isUploaded'] = "no files for upload!"
-	# return render(request, 'triangle.html', context)
+    context = {}
+    myfile = request.FILES.get("myFile", None)  # 获取上传的文件，如果没有文件，则默认为None
+    if not myfile:
+        context['isUploaded'] = "no files for upload!"
+    # return render(request, 'triangle.html', context)
 
-	destination = open(os.path.join("../softwareTest/upload", myfile.name), 'wb+')  # 打开特定的文件进行二进制的写操作
+    destination = open(os.path.join("../softwareTest/upload", myfile.name), 'wb+')  # 打开特定的文件进行二进制的写操作
 
-	for chunk in myfile.chunks():  # 分块写入文件
-		destination.write(chunk)
-	destination.close()
+    for chunk in myfile.chunks():  # 分块写入文件
+        destination.write(chunk)
+    destination.close()
 
-	filePath = ''.join(["../softwareTest/upload/", myfile.name])
-	fo = open("../softwareTest/upload/catalog.txt", "wb")
-	#filePath = ''.join(['upload', myfile.name])
-	#fo = open('upload/catalog.txt', "wb")
-	fo.write(filePath)
-	fo.close()
-	context['isUploaded'] = "upload over!"
+    filePath = ''.join(["../softwareTest/upload/", myfile.name])
+    fo = open("../softwareTest/upload/catalog.txt", "wb")
+    #filePath = ''.join(['upload', myfile.name])
+    #fo = open('upload/catalog.txt', "wb")
+    fo.write(filePath)
+    fo.close()
+    context['isUploaded'] = "upload over!"
 
 
-	# return render(request, 'triangle.html', context)
+    # return render(request, 'triangle.html', context)
 
-	# filePath = str(request.POST["filePath"])
+    # filePath = str(request.POST["filePath"])
 
-	csvfile = file(filePath, 'rb')
-	csvfile.readline()
-	reader = csv.reader(csvfile)
-	sideLst = []
-	resultLst = []
-	percentage = []
-	expectLst = []
-	timeLst = []
-	for line in reader:
-		a = line[0]
-		b = line[1]
-		c = line[2]
-		eLst = line[3]
-		expectLst.append(eLst)
-		a, b, c = map(int, (a, b, c))
-		isTriangle(a, b, c, resultLst, percentage)
-		nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-		timeLst.append(nowTime)
-		side = str(a) + ',' + str(b) + ',' + str(c)
-		sideLst.append(side)
+    csvfile = file(filePath, 'rb')
+    csvfile.readline()
+    reader = csv.reader(csvfile)
+    sideLst = []
+    resultLst = []
+    percentage = []
+    numberLst = []
+    expectLst = []
+    timeLst = []
+    for line in reader:
+        numberLst.append(line[0])
+        a = line[1]
+        b = line[2]
+        c = line[3]
+        eLst = line[4]
+        expectLst.append(eLst)
+        a, b, c = map(int, (a, b, c))
+        isTriangle(a, b, c, resultLst, percentage)
+        nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        timeLst.append(nowTime)
+        side = str(a) + ',' + str(b) + ',' + str(c)
+        sideLst.append(side)
 
-	context['sideLst'] = sideLst
-	context['resultLst'] = resultLst
-	context['total'] = len(resultLst)
-	context['expectLst'] = expectLst
-	context['timeLst'] = timeLst
-	context['isNotTriPer'] = percentage.count('isNotTri')
-	context['wrongInputPer'] = percentage.count('wrongInput')
-	context['isTriPer'] = percentage.count('isTri')
-	#print(percentage)
-	return render(request, 'index.html', context)  #
-	# def triangle(request):
-	# 	context = {}
-	# 	context['button'] = "check to start"
-	# 	return render(request, 'triangle.html', context)
+    context['number'] = numberLst
+    context['sideLst'] = sideLst
+    context['resultLst'] = resultLst
+    context['total'] = len(resultLst)
+    context['expectLst'] = expectLst
+    context['timeLst'] = timeLst
+    context['isNotTriPer'] = percentage.count('isNotTri')
+    context['wrongInputPer'] = percentage.count('wrongInput')
+    context['isTriPer'] = percentage.count('isTri')
+    #print(percentage)
+    return render(request, 'index.html', context)  #
+    # def triangle(request):
+    # 	context = {}
+    # 	context['button'] = "check to start"
+    # 	return render(request, 'triangle.html', context)
 
 def triangle_input(request):
 	try:

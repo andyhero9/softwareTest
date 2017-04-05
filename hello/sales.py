@@ -70,57 +70,60 @@ def total_Sales(x, y, z, resultLst):
 
 
 def csv_sales_Post(request):
-	global output
-	# upload files
-	context = {}
-	myfile = request.FILES.get("myFile", None)  # 获取上传的文件，如果没有文件，则默认为None
-	if not myfile:
-		context['isUploaded'] = "no files for upload!"
-	# return render(request, 'triangle.html', context)
-	
-	destination = open(os.path.join("../softwareTest/upload", myfile.name), 'wb+')  # 打开特定的文件进行二进制的写操作
-	for chunk in myfile.chunks():  # 分块写入文件
-		destination.write(chunk)
-	destination.close()
-	
-	filePath = ''.join(["../softwareTest/upload/", myfile.name])
-	fo = open("../softwareTest/upload/catalog.txt", "wb")
-	fo.write(filePath)
-	fo.close()
-	context['isUploaded'] = "upload over!"
-	
-	csvfile = file(filePath, 'rb')
-	csvfile.readline()
-	reader = csv.reader(csvfile)
-	resultLst = []
-	expectLst = []
-	inputLst = []
-	timeLst = []
-	for line in reader:
-		x = int(line[0])
-		y = int(line[1])
-		z = int(line[2])
-		csv_Num(x, y, z, resultLst)
-		nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-		timeLst.append(nowTime)
-		inputNum = ','.join([str(x), str(y), str(z)])
-		inputLst.append(inputNum)
-		expectLst.append(line[3])
-	
-	context['resultLst'] = resultLst
-	context['inputLst'] = inputLst
-	context['expectLst'] = expectLst
-	context['timeLst'] = timeLst
-	context['total'] = len(inputLst)
-	context['wrongInput'] = output.d
-	context['low'] = output.a
-	context['medium'] = output.b
-	context['high'] = output.c
-	output.a = 0
-	output.b = 0
-	output.c = 0
-	output.d = 0
-	return render(request, 'commission.html', context)
+    global output
+    # upload files
+    context = {}
+    myfile = request.FILES.get("myFile", None)  # 获取上传的文件，如果没有文件，则默认为None
+    if not myfile:
+        context['isUploaded'] = "no files for upload!"
+    # return render(request, 'triangle.html', context)
+
+    destination = open(os.path.join("../softwareTest/upload", myfile.name), 'wb+')  # 打开特定的文件进行二进制的写操作
+    for chunk in myfile.chunks():  # 分块写入文件
+        destination.write(chunk)
+    destination.close()
+
+    filePath = ''.join(["../softwareTest/upload/", myfile.name])
+    fo = open("../softwareTest/upload/catalog.txt", "wb")
+    fo.write(filePath)
+    fo.close()
+    context['isUploaded'] = "upload over!"
+
+    csvfile = file(filePath, 'rb')
+    csvfile.readline()
+    reader = csv.reader(csvfile)
+    resultLst = []
+    expectLst = []
+    inputLst = []
+    timeLst = []
+    numberLst = []
+    for line in reader:
+        numberLst.append(line[0])
+        x = int(line[1])
+        y = int(line[2])
+        z = int(line[3])
+        csv_Num(x, y, z, resultLst)
+        nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        timeLst.append(nowTime)
+        inputNum = ','.join([str(x), str(y), str(z)])
+        inputLst.append(inputNum)
+        expectLst.append(line[4])
+
+    context['number'] = numberLst
+    context['resultLst'] = resultLst
+    context['inputLst'] = inputLst
+    context['expectLst'] = expectLst
+    context['timeLst'] = timeLst
+    context['total'] = len(inputLst)
+    context['wrongInput'] = output.d
+    context['low'] = output.a
+    context['medium'] = output.b
+    context['high'] = output.c
+    output.a = 0
+    output.b = 0
+    output.c = 0
+    output.d = 0
+    return render(request, 'commission.html', context)
 
 
 def sales(request):
@@ -151,6 +154,7 @@ def reward_Post(request):
     resultLst = []
     total = int(request.POST["reward"])
     context={}
+    temp = 1
     if 100<=total<7800:
         for i in range(1, 91):
             x = total - i * 25
@@ -162,15 +166,17 @@ def reward_Post(request):
                             z = (total - i * 25 - j * 45)
                             # print "z",z%30
                             if z % 30 == 0 and i * 25 + j * 45 + k * 30 == total:
-                                result = ",".join([str(i), str(j), str(k), str(total)])
+                                num = "".join([str('ST'),str(temp).zfill(3)])
+                                result = ",".join([str(num),str(i), str(j), str(k), str(total)])
+                                temp = temp + 1
                                 resultLst.append(result)
 
 
         with open('../softwareTest/upload/result001.csv', 'wb') as csvfiles:
             spamwriter = csv.writer(csvfiles, dialect='excel')
-            spamwriter.writerow(['x', 'y', 'z', 'e'])
+            spamwriter.writerow(['num','x', 'y', 'z', 'e'])
             for line in resultLst:
-                spamwriter.writerow([line.split(",")[0], line.split(",")[1], line.split(",")[2], line.split(",")[3]])
+                spamwriter.writerow([line.split(",")[0],line.split(",")[1], line.split(",")[2], line.split(",")[3], line.split(",")[4]])
             csvfiles.close()
 
         csvfile = file('../softwareTest/upload/result001.csv', 'rb')
@@ -180,17 +186,20 @@ def reward_Post(request):
         expectLst = []
         inputLst = []
         timeLst = []
+        numberLst=[]
         for line in reader:
-            x = int(line[0])
-            y = int(line[1])
-            z = int(line[2])
+            numberLst.append(line[0])
+            x = int(line[1])
+            y = int(line[2])
+            z = int(line[3])
             csv_Num(x, y, z, resultLst)
             nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             timeLst.append(nowTime)
             inputNum = ','.join([str(x), str(y), str(z)])
             inputLst.append(inputNum)
-            expectLst.append(line[3])
+            expectLst.append(line[4])
 
+        context['number'] = numberLst
         context['resultLst'] = resultLst
         context['inputLst'] = inputLst
         context['expectLst'] = expectLst
