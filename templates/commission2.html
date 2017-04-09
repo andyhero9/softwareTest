@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>软件测试|佣金问题测试-所有组合</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../static/css/foundation.min.css">
+	<script src="../static/js/foundation.min.js"></script>
+	<script src="../static/js/vendor/modernizr.js"></script>
+	<script src="../static/js/vendor/jquery.js"></script>
+	<script src="../static/js/highcharts.src.js"></script>
+
+	<script>
+        $(document).ready(function () {
+            var chart = {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            };
+            var title = {
+                text: '佣金问题用例测试分析 \n <b>total: {{ total }}</b>'
+            };
+            var tooltip = {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            };
+            var plotOptions = {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            };
+            var series = [{
+                type: 'pie',
+                name: 'percentage',
+                data: [
+
+                    {
+                        name: '"x < 1000" <b>{{ low }}</b>',
+                        y: {{ low }},
+                        sliced: true,
+                        selected: true
+                    },
+                    ['"1000 <= x < 1800" <b>{{ medium }}</b>', {{ medium }}],
+                    ['"x => 1800" <b>{{ high }}</b>', {{ high }}],
+                    ['"错误用例" <b>{{ wrongInput }}</b>', {{ wrongInput }}]
+                ]
+            }];
+
+            var json = {};
+            json.chart = chart;
+            json.title = title;
+            json.tooltip = tooltip;
+            json.series = series;
+            json.plotOptions = plotOptions;
+            $('#container').highcharts(json);
+        });
+	</script>
+
+</head>
+
+<body style="margin-left: 8%;margin-right: 8%;">
+<nav class="top-bar" data-topbar>
+	<ul class="title-area">
+		<li class="name">
+			<h1 style="font-family:Monospace;font-size:1.2em;"><a href="#">S O F T W A R E - T E S T I N G &nbsp</a>
+			</h1>
+		</li>
+		<!-- 小屏幕上折叠按钮: 去掉 .menu-icon 类，可以去除图标。
+  如果需要只显示图片，可以删除 "Menu" 文本 -->
+		<li class="toggle-topbar menu-icon"><a href="#"><span>TEST</span></a></li>
+	</ul>
+
+	<section class="top-bar-section">
+		<ul class="left">
+			<li><a href="{% url 'toIndex' %}">三 角 形</a></li>
+			<li class="divider"></li>
+			<li><a href="{% url 'toNextDay' %}">下 一 日 期</a></li>
+			<li class="divider"></li>
+			<li class="active"><a href="#">推 销 员 佣 金</a></li>
+			<li class="divider"></li>
+			<li><a href="#">。。。</a></li>
+			<li class="divider"></li>
+		</ul>
+	</section>
+</nav>
+
+<div class="row" style="max-width:100rem; margin-top: 30px;background-color: #cfd0cd1a;padding: 20px;">
+	<h3>所有组合 <a href="{% url 'toCommission' %}" style="font-size: small"> 返回佣金测试</a></h3>
+
+	<ul class="side-nav">
+		<li class="divider"></li>
+	</ul>
+
+	<fieldset>
+		<legend>all combinations</legend>
+
+		<div class="row">
+
+			<form action="/combination_input/" method="post">
+				{% csrf_token %}
+				<div class="large-5 columns">
+					<input type="text" name="reward" placeholder="输入佣金数额 : 100 <= x < 7800">
+				</div>
+				<div class="large-2 columns">
+					<input type="submit" class="button postfix"
+					       style="width: 80%; border-radius: 5px;">
+				</div>
+				<div class="large-5 columns">
+					<b style="color: #C91623;">{{ reward }}</b>
+				</div>
+			</form>
+		</div>
+
+		<ul class="side-nav">
+			<li class="divider"></li>
+		</ul>
+
+		<div class="responsive">
+			{% load mytags %}
+			{% load mytags2 %}
+			{% load mytags3 %}
+			{% load mytags4 %}
+			<table style="width: 100%">
+				<thead>
+				<tr>
+					<th style="text-align: center">编 号</th>
+					<th style="text-align: center">外 设 / 台, 主 机 / 台, 显示器 / 台</th>
+					<th style="text-align: center">提 成 ／ 元</th>
+				</tr>
+				</thead>
+
+				<tbody>
+				{% for i in number %}
+					<tr>
+						<td style="text-align: center">{{ i }}</td>
+						<td style="text-align: center">{{ inputLst|qwer1111 }}</td>
+						<td style="text-align: center">{{ expectLst|qwer2222 }}</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</fieldset>
+
+
+	{#	<div class="large-5 columns">#}
+	{#		<h3>分 析</h3>#}
+	{#		<ul class="side-nav">#}
+	{#			<li class="divider"></li>#}
+	{#		</ul>#}
+	{##}
+	{#		<div id="container" style="height: 400px; margin: 0"></div>#}
+	{#	</div>#}
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $(document).foundation();
+    })
+
+</script>
+
+
+</body>
+
+</html>

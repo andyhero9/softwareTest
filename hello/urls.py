@@ -34,7 +34,9 @@ urlpatterns = [
 	url(r'^sales/', sales.csv_sales_Post),
 	url(r'^toIndex/$', hello.views.toIndex, name='toIndex'),
 	url(r'^toNextday/$', hello.views.toNextDay, name='toNextDay'),
-	url(r'^toCommission/$', hello.views.toCommission, name='toCommission')
-
-	#(r'^static/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.STATIC_PATH})
+	url(r'^toCommission/$', hello.views.toCommission, name='toCommission'),
+	url(r'^toCommission2/$', hello.views.toCommission2, name='toCommission2'),
+	url(r'^combination_input/', sales.reward_Post)
+	
+	# (r'^static/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.STATIC_PATH})
 ]

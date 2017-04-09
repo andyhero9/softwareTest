@@ -9,3 +9,6 @@ def toNextDay(request):
 
 def toCommission(request):
 	return render(request, 'commission.html')
+
+def toCommission2(request):
+	return render(request, 'commission2.html')
