@@ -161,9 +161,11 @@
 				{% load mytags %}
 				{% load mytags2 %}
 				{% load mytags3 %}
+				{% load mytags4 %}
 				<table>
 					<thead>
 					<tr>
+						<th style="text-align: center">用例编号</th>
 						<th style="text-align: center">输入用例（外设，主机，显示器）</th>
 						<th style="text-align: center">预期输出</th>
 						<th style="text-align: center">实际输出</th>
@@ -172,12 +174,13 @@
 					</thead>
 
 					<tbody>
-					{% for i in inputLst %}
+					{% for i in number %}
 						<tr>
 							<td>{{ i }}</td>
-							<td>{{ expectLst|qwer111 }}</td>
-							<td>{{ resultLst|qwer222 }}</td>
-							<td>{{ timeLst|qwer333 }}</td>
+							<td>{{ inputLst|qwer111 }}</td>
+							<td>{{ expectLst|qwer222 }}</td>
+							<td>{{ resultLst|qwer333 }}</td>
+							<td>{{ timeLst|qwer444 }}</td>
 						</tr>
 					{% endfor %}
 					</tbody>

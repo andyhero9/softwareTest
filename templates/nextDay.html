@@ -63,7 +63,8 @@
 <nav class="top-bar" data-topbar>
 	<ul class="title-area">
 		<li class="name">
-			<h1 style="font-family:Monospace;font-size:1.2em;"><a href="#">S O F T W A R E - T E S T I N G &nbsp</a></h1>
+			<h1 style="font-family:Monospace;font-size:1.2em;"><a href="#">S O F T W A R E - T E S T I N G &nbsp</a>
+			</h1>
 		</li>
 		<!-- 小屏幕上折叠按钮: 去掉 .menu-icon 类，可以去除图标。
   如果需要只显示图片，可以删除 "Menu" 文本 -->
@@ -72,11 +73,11 @@
 
 	<section class="top-bar-section">
 		<ul class="left">
-			<li><a href="{% url 'toIndex'%}">三 角 形</a></li>
+			<li><a href="{% url 'toIndex' %}">三 角 形</a></li>
 			<li class="divider"></li>
 			<li class="active"><a href="#">下 一 日 期</a></li>
 			<li class="divider"></li>
-			<li><a href="{% url 'toCommission'%}">推 销 员 佣 金</a></li>
+			<li><a href="{% url 'toCommission' %}">推 销 员 佣 金</a></li>
 			<li class="divider"></li>
 			<li><a href="#">。。。</a></li>
 			<li class="divider"></li>
@@ -151,6 +152,7 @@
 				<table>
 					<thead>
 					<tr>
+						<th style="text-align: center">用例编号</th>
 						<th style="text-align: center">输入用例（年-月-日）</th>
 						<th style="text-align: center">预计输出</th>
 						<th style="text-align: center">实际输出</th>
@@ -162,13 +164,15 @@
 					{% load mytags %}
 					{% load mytags2 %}
 					{% load mytags3 %}
+					{% load mytags4 %}
 					<tbody>
-					{% for i in inputLst %}
+					{% for i in number %}
 						<tr>
 							<td>{{ i }}</td>
-							<td>{{ expectLst|qwer11 }}</td>
-							<td>{{ nextDayLst|qwer22 }}</td>
-							<td>{{ timeLst|qwer33 }}</td>
+							<td>{{ inputLst|qwer11 }}</td>
+							<td>{{ expectLst|qwer22 }}</td>
+							<td>{{ nextDayLst|qwer33 }}</td>
+							<td>{{ timeLst|qwer44 }}</td>
 						</tr>
 					{% endfor %}
 					</tbody>
