@@ -43,3 +43,18 @@ def qwer111(value):
 	else:
 		k = 1
 		return value[0]
+
+
+m = 0
+
+
+@register.filter
+def qwer1111(value):
+	global m
+	if m < len(value):
+		value = value[m]
+		m = m + 1
+		return str(value)
+	else:
+		m = 1
+		return value[0]

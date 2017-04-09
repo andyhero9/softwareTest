@@ -3,10 +3,10 @@ from django import template
 register = template.Library()
 i = 0
 
+
 @register.filter
-def qwer2(value):
+def qwer4(value):
 	global i
-	print 'qwer2', i
 	if i < len(value):
 		value = value[i]
 		i = i + 1
@@ -18,10 +18,10 @@ def qwer2(value):
 
 j = 0
 
+
 @register.filter
-def qwer22(value):
+def qwer44(value):
 	global j
-	print 'qwer1', j
 	if j < len(value):
 		value = value[j]
 		j = j + 1
@@ -33,10 +33,10 @@ def qwer22(value):
 
 k = 0
 
+
 @register.filter
-def qwer222(value):
+def qwer444(value):
 	global k
-	print 'qwer1', k
 	if k < len(value):
 		value = value[k]
 		k = k + 1
@@ -44,13 +44,12 @@ def qwer222(value):
 	else:
 		k = 1
 		return value[0]
-
-
+	
 m = 0
 
 
 @register.filter
-def qwer2222(value):
+def qwer4444(value):
 	global m
 	if m < len(value):
 		value = value[m]
@@ -59,3 +58,4 @@ def qwer2222(value):
 	else:
 		m = 1
 		return value[0]
+
