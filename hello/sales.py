@@ -159,7 +159,7 @@ def reward_Post(request):
     
     print ("I am in reward post")
     
-    if 100 <= total < 7800:
+    if 100 <= total <= 7800:
         for i in range(1, 91):
             x = total - i * 25
             if (x >= 75):

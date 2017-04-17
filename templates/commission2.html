@@ -104,7 +104,7 @@
 			<form action="/combination_input/" method="post">
 				{% csrf_token %}
 				<div class="large-5 columns">
-					<input type="text" name="reward" placeholder="输入佣金数额 : 100 <= x < 7800">
+					<input type="text" name="reward" placeholder="输入销售额 : 100 <= x <= 7800">
 				</div>
 				<div class="large-2 columns">
 					<input type="submit" class="button postfix"
@@ -130,16 +130,16 @@
 				<tr>
 					<th style="text-align: center">编 号</th>
 					<th style="text-align: center">外 设 / 台, 主 机 / 台, 显示器 / 台</th>
-					<th style="text-align: center">提 成 ／ 元</th>
+					<th style="text-align: center">销 售 额 ／ 元</th>
 				</tr>
 				</thead>
 
 				<tbody>
 				{% for i in number %}
 					<tr>
-						<td style="text-align: center">{{ i }}</td>
-						<td style="text-align: center">{{ inputLst|qwer1111 }}</td>
-						<td style="text-align: center">{{ expectLst|qwer2222 }}</td>
+						<td style="text-align: center; letter-spacing: 2px;">{{ i }}</td>
+						<td style="text-align: center;">{{ inputLst|qwer1111 }}</td>
+						<td style="text-align: center; letter-spacing: 2px;">{{ expectLst|qwer2222 }}</td>
 					</tr>
 				{% endfor %}
 				</tbody>
