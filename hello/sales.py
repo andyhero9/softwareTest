@@ -3,6 +3,7 @@ from django.shortcuts import render
 import csv
 import os
 import datetime
+from outputCsv import insertCsv,outCsv
 
 
 class output:
@@ -21,13 +22,13 @@ def input_Num(x, y, z, resultLst):
             if 1 <= z <= 80:
                 total_Sales(x, y, z, resultLst)
             else:
-                result = "显示器数量错误"
+                result = "外设数量错误"
                 resultLst.append(result)
         else:
             result = "主机数量错误"
             resultLst.append(result)
     else:
-        result = "外设数量错误"
+        result = "显示器数量错误"
         resultLst.append(result)
 
 
@@ -38,7 +39,7 @@ def csv_Num(x, y, z, resultLst):
             if 1 <= z <= 80:
                 total_Sales(x, y, z, resultLst)
             else:
-                result = "显示器数量错误"
+                result = "外设数量错误"
                 output.d = output.d + 1
                 resultLst.append(result)
         else:
@@ -46,7 +47,7 @@ def csv_Num(x, y, z, resultLst):
             output.d = output.d + 1
             resultLst.append(result)
     else:
-        result = "外设数量错误"
+        result = "显示器数量错误"
         output.d = output.d + 1
         resultLst.append(result)
 
@@ -66,6 +67,8 @@ def total_Sales(x, y, z, resultLst):
         output.c = output.c + 1
     # print "reward:",reward
     result = reward
+    #result=float(str(float(reward)).rstrip('0'))
+    print type(result),type(reward)
     resultLst.append(result)
 
 
@@ -97,6 +100,7 @@ def csv_sales_Post(request):
     inputLst = []
     timeLst = []
     numberLst = []
+    staffLst=[]
     for line in reader:
         numberLst.append(line[0])
         x = int(line[1])
@@ -107,7 +111,8 @@ def csv_sales_Post(request):
         timeLst.append(nowTime)
         inputNum = ','.join([str(x), str(y), str(z)])
         inputLst.append(inputNum)
-        expectLst.append(line[4])
+        expectLst.append(line[5])
+        staffLst.append('Tester')
 
     context['number'] = numberLst
     context['resultLst'] = resultLst
@@ -123,6 +128,7 @@ def csv_sales_Post(request):
     output.b = 0
     output.c = 0
     output.d = 0
+    outCsv(numberLst,inputLst,expectLst,resultLst,timeLst,staffLst,'SalesResult')
     return render(request, 'commission.html', context)
 
 
@@ -140,9 +146,11 @@ def sales_Post(request):
         z = int(request.POST["z"])
         resultLst = ['error']
         input_Num(x, y, z, resultLst)
+        nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         context = {}
         context['reward'] = resultLst[1]
         # context['time'] = nowTime
+        insertCsv(x,y,z,resultLst[1],resultLst[1],nowTime,'Tester','Single_sales')
         return render(request, 'commission.html', context)
     except:
         context = {}

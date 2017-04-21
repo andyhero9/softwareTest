@@ -4,6 +4,7 @@ import csv
 import datetime
 import re
 import os
+from outputCsv import insertCsv,outCsv
 
 
 def nextDay(year, month, day, resultLst):
@@ -57,7 +58,7 @@ def is_valied_date(year, month, day, resultLst):
 		resultLst.append(result)
 	"""
 	try:
-	  time.strptime(ndate, "%Y-%m-%d")
+	  time.strptime(ndate, "%Y/%m/%d")
 	  is_theNextDay(year, month, day,resultLst)
 	except:
 	  result = "错误日期"
@@ -67,10 +68,11 @@ def is_valied_date(year, month, day, resultLst):
 
 
 def is_theNextDay(year, month, day, resultLst):
-	thisDay = datetime.date(int(year), int(month), int(day))
-	nextDay = thisDay + datetime.timedelta(days=1)
-	result = nextDay.isoformat()
-	resultLst.append(result)
+    thisDay = datetime.date(int(year), int(month), int(day))
+    nextDay = thisDay + datetime.timedelta(days=1)
+    results = nextDay.isoformat().split('-')
+    result = '/'.join([results[0],results[1],results[2]])
+    resultLst.append(result)
 
 
 # def readCsv(resultLst):
@@ -85,81 +87,105 @@ def is_theNextDay(year, month, day, resultLst):
 #         csv_nextDay(year, month, day,resultLst)
 
 def nextDay_Post(request):
-	try:
-		int(request.POST["year"])
-		int(request.POST["month"])
-		int(request.POST["day"])
-		year = request.POST["year"]
-		month = request.POST["month"]
-		day = request.POST["day"]
-		resultLst = ['error']
-		# nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-		nextDay(year, month, day, resultLst)
-		context = {}
-		context['nextDay'] = resultLst[1]
-		# context['time'] = nowTime
-		return render(request, 'nextDay.html', context)
-	except:
-		context = {}
-		context['nextDay'] = "输入有误"
-		# context['time'] = nowTime
-		return render(request, 'nextDay.html', context)
+    try:
+        int(request.POST["year"])
+        int(request.POST["month"])
+        int(request.POST["day"])
+        year = request.POST["year"]
+        month = request.POST["month"]
+        day = request.POST["day"]
+        resultLst = ['error']
+        nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        nextDay(year, month, day, resultLst)
+        context = {}
+        context['nextDay'] = resultLst[1]
+        # context['time'] = nowTime
+        expect = resultLst[1]
+        reality = resultLst[1]
+        insertCsv(year, month, day, expect, reality, nowTime, 'Tesyer', 'Single_date')
+        return render(request, 'nextDay.html', context)
+    except:
+        context = {}
+        context['nextDay'] = "输入有误"
+        # context['time'] = nowTime
+        return render(request, 'nextDay.html', context)
 
-
+'''
+def nextDay_Post(request):
+    int(request.POST["year"])
+    int(request.POST["month"])
+    int(request.POST["day"])
+    year = request.POST["year"]
+    month = request.POST["month"]
+    day = request.POST["day"]
+    resultLst = ['error']
+    nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    nextDay(year, month, day, resultLst)
+    context = {}
+    context['nextDay'] = resultLst[1]
+    # context['time'] = nowTime
+    expect = resultLst[1]
+    reality = resultLst[1]
+    insertCsv(year,month,day,expect,reality,nowTime,'Tesyer','Single_date')
+    return render(request, 'nextDay.html', context)
+'''
 def nextDay_Post_Csv(request):
-	resultLst = []
-	percentage = []
-	timeLst = []
-	print 'aaaaaaaaaaaaaaaaa'
-	
-	context = {}
-	
-	myfile = request.FILES.get("myFile", None)  # 获取上传的文件，如果没有文件，则默认为None
-	if not myfile:
-		context['isUploaded'] = "no files for upload!"
-		# return render(request, 'nextDay.html', context)
-	destination = open(os.path.join("../softwareTest/upload", myfile.name), 'wb+')  # 打开特定的文件进行二进制的写操作
-	
-	for chunk in myfile.chunks():  # 分块写入文件
-		destination.write(chunk)
-	destination.close()
-	
-	print 'afffffaa'
-	
-	filePath = ''.join(["../softwareTest/upload/", myfile.name])
-	fo = open("../softwareTest/upload/catalog.txt", "wb")
-	fo.write(filePath)
-	fo.close()
-	context['isUploaded'] = "upload over!"
-	# return render(request, 'nextDay.html', context)
+    resultLst = []
+    percentage = []
+    timeLst = []
+    #print 'aaaaaaaaaaaaaaaaa'
 
-	csvfile = open(filePath, 'r')
-	csvfile.readline()
-	reader = csv.reader(csvfile)
-	expectLst = []
-	inputLst=[]
-	numberLst=[]
-	for line in reader:
-		numberLst.append(line[0])
-		year = int(line[1])
-		month = int(line[2])
-		day = int(line[3])
-		ndate = '-'.join([str(year), str(month), str(day)])
-		inputLst.append(ndate)
-		expectLst.append(line[4])
-		csv_nextDay(year, month, day, resultLst, percentage)
-		nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-		timeLst.append(nowTime)
+    context = {}
 
-	context['number'] = numberLst
-	context['nextDayLst'] = resultLst
-	context['inputLst'] = inputLst
-	context['expectLst'] = expectLst
-	context['timeLst'] = timeLst
-	context['total'] = len(resultLst)
-	context['trueDate'] = percentage.count('1')
-	context['fakeDate'] = len(resultLst) - percentage.count('1')
-	return render(request, 'nextDay.html', context)
+    myfile = request.FILES.get("myFile", None)  # 获取上传的文件，如果没有文件，则默认为None
+    if not myfile:
+        context['isUploaded'] = "no files for upload!"
+        # return render(request, 'nextDay.html', context)
+    destination = open(os.path.join("../softwareTest/upload", myfile.name), 'wb+')  # 打开特定的文件进行二进制的写操作
+
+    for chunk in myfile.chunks():  # 分块写入文件
+        destination.write(chunk)
+    destination.close()
+
+    #print 'afffffaa'
+
+    filePath = ''.join(["../softwareTest/upload/", myfile.name])
+    fo = open("../softwareTest/upload/catalog.txt", "wb")
+    fo.write(filePath)
+    fo.close()
+    context['isUploaded'] = "upload over!"
+    # return render(request, 'nextDay.html', context)
+
+    csvfile = open(filePath, 'r')
+    csvfile.readline()
+    reader = csv.reader(csvfile)
+    expectLst = []
+    inputLst=[]
+    numberLst=[]
+    staffLst=[]
+    for line in reader:
+        numberLst.append(line[0])
+        year = int(line[1])
+        month = int(line[2])
+        day = int(line[3])
+        ndate = ','.join([str(year), str(month), str(day)])
+        inputLst.append(ndate)
+        expectLst.append(line[4])
+        csv_nextDay(year, month, day, resultLst, percentage)
+        nowTime = datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S')
+        timeLst.append(nowTime)
+        staffLst.append('Tester')
+
+    context['number'] = numberLst
+    context['nextDayLst'] = resultLst
+    context['inputLst'] = inputLst
+    context['expectLst'] = expectLst
+    context['timeLst'] = timeLst
+    context['total'] = len(resultLst)
+    context['trueDate'] = percentage.count('1')
+    context['fakeDate'] = len(resultLst) - percentage.count('1')
+    outCsv(numberLst,inputLst,expectLst,resultLst,timeLst,staffLst,'DateResult')
+    return render(request, 'nextDay.html', context)
 
 
 def nextDay_Get(request):

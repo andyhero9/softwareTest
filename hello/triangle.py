@@ -3,6 +3,7 @@ from django.shortcuts import render
 import csv
 import os
 import datetime
+from outputCsv import insertCsv,outCsv
 
 
 def isTriangle(a, b, c, resultLst, percentage):
@@ -39,7 +40,7 @@ def isTriangle(a, b, c, resultLst, percentage):
 			resultLst.append(result)
 	else:
 		# print "输入数值有误(1<=a,b,c<=100)"
-		result = "输入数值有误(1<=a,b,c<=100)"
+		result = "输入数值有误(1<=a/b/c<=100)"
 		percentage.append("wrongInput")
 		resultLst.append(result)
 
@@ -79,6 +80,7 @@ def triangle_post(request):
     numberLst = []
     expectLst = []
     timeLst = []
+    staffLst=[]
     for line in reader:
         numberLst.append(line[0])
         a = line[1]
@@ -92,6 +94,7 @@ def triangle_post(request):
         timeLst.append(nowTime)
         side = str(a) + ',' + str(b) + ',' + str(c)
         sideLst.append(side)
+        staffLst.append('Tester')
 
     context['number'] = numberLst
     context['sideLst'] = sideLst
@@ -103,6 +106,7 @@ def triangle_post(request):
     context['wrongInputPer'] = percentage.count('wrongInput')
     context['isTriPer'] = percentage.count('isTri')
     #print(percentage)
+    outCsv(numberLst,sideLst,expectLst,resultLst,timeLst,staffLst,'TriangleResult')
     return render(request, 'index.html', context)  #
     # def triangle(request):
     # 	context = {}
@@ -140,13 +144,14 @@ def triangle_input(request):
 				result = "不是三角形"
 		else:
 			# print "输入数值有误(1<=a,b,c<=100)"
-			result = "输入数值有误(1<=a,b,c<=100)"
+			result = "输入数值有误(1<=a/b/c<=100)"
 		# nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
 		context = {}
 		context['result'] = result
 		#print result
 		# context['time'] = nowTime
+
 		return render(request, 'index.html', context)
 
 	except:
