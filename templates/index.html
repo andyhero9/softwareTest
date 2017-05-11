@@ -42,8 +42,8 @@
                     {
                         name: '三角形 <b>{{ isTriPer }}</b>',
                         y: {{ isTriPer }},
-                        sliced: true,
-                        selected: true
+                        sliced: false,
+                        selected: false
                     },
                     ['输入错误 <b>{{ wrongInputPer }}</b>', {{ wrongInputPer }}],
                     ['非三角形 <b>{{ isNotTriPer }}</b>', {{ isNotTriPer }}]
@@ -80,6 +80,8 @@
 			<li><a href="{% url 'toNextDay'%}">下 一 日 期</a></li>
 			<li class="divider"></li>
 			<li><a href="{% url 'toCommission'%}">推 销 员 佣 金</a></li>
+			<li class="divider"></li>
+			<li><a href="{% url 'toPhoneBill' %}">话 费 问 题</a></li>
 			<li class="divider"></li>
 			<li><a href="#">。。。</a></li>
 			<li class="divider"></li>

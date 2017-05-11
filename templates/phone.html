@@ -1,10 +1,235 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+	<title>软件测试|话费问题测试</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../static/css/foundation.min.css">
+	<script src="../static/js/foundation.min.js"></script>
+	<script src="../static/js/vendor/modernizr.js"></script>
+	<script src="../static/js/vendor/jquery.js"></script>
+	<script src="../static/js/highcharts.src.js"></script>
 
+	<script>
+        $(document).ready(function () {
+
+            var chart = {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            };
+            var title = {
+                text: '话费问题用例测试分析 \n <b>total: {{ total }}</b>',
+            };
+            var tooltip = {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            };
+            var plotOptions = {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            };
+            var series = [{
+                type: 'pie',
+                name: 'percentage',
+                data: [
+                    {
+                        name: '0 < 通话时间 <= 60 <b>{{ l1 }}</b>',
+                        y: {{ l1 }},
+                        sliced: false,
+                        selected: false
+                    },
+                    ['60 < 通话时间 <= 120 <b>{{ l2 }}</b>', {{ l2 }}],
+                    ['120 < 通话时间 <= 180 <b>{{ l3 }}</b>', {{ l3 }}],
+                    ['180 < 通话时间 <= 300 <b>{{ l4 }}</b>', {{ l4 }}],
+                    ['300 < 通话时间 <b>{{ l5 }}</b>', {{ l5 }}]
+                ]
+            }];
+
+            var json = {};
+            json.chart = chart;
+            json.title = title;
+            json.tooltip = tooltip;
+            json.series = series;
+            json.plotOptions = plotOptions;
+            $('#container').highcharts(json);
+
+        });
+	</script>
+
+</head>
+
+<body style="margin-left: 8%;margin-right: 8%;">
+<nav class="top-bar" data-topbar>
+	<ul class="title-area">
+		<li class="name">
+			<h1 style="font-family:Monospace;font-size:1.2em;"><a href="#">S O F T W A R E - T E S T I N G &nbsp</a>
+			</h1>
+		</li>
+		<!-- 小屏幕上折叠按钮: 去掉 .menu-icon 类，可以去除图标。
+  如果需要只显示图片，可以删除 "Menu" 文本 -->
+		<li class="toggle-topbar menu-icon"><a href="#"><span>TEST</span></a></li>
+	</ul>
+
+	<section class="top-bar-section">
+		<ul class="left">
+			<li><a href="{% url 'toIndex' %}">三 角 形</a></li>
+			<li class="divider"></li>
+			<li><a href="{% url 'toNextDay' %}">下 一 日 期</a></li>
+			<li class="divider"></li>
+			<li><a href="{% url 'toCommission' %}">推 销 员 佣 金</a></li>
+			<li class="divider"></li>
+			<li class="active"><a href="#">话 费 问 题</a></li>
+			<li class="divider"></li>
+			<li><a href="#">。。。</a></li>
+			<li class="divider"></li>
+		</ul>
+
+	</section>
+</nav>
+
+<div class="row" style="max-width:100rem; margin-top: 30px;background-color: #cfd0cd1a;padding: 20px;">
+	<div class="large-7 columns" style="border-right:dotted; border-color: #008CBA;border-width: 1px">
+		<h3>测 试</h3>
+		<ul class="side-nav">
+			<li class="divider"></li>
+		</ul>
+
+		<fieldset>
+			<legend>Individual Input Testing</legend>
+			<div class="row">
+				<form action="/phone_input/" method="post">
+					{% csrf_token %}
+					<div class="large-3 columns">
+						<input type="text" name="holding_Time" placeholder="本月通话分钟数">
+					</div>
+					<div class="large-3 columns">
+						<input type="text" name="owe_Num" placeholder="未按时缴费次数">
+					</div>
+					<div class="large-3 columns">
+						<input type="text" name="month" placeholder="当前月份">
+					</div>
+
+					<div class="large-3 columns">
+						<input type="submit" class="button postfix"
+						       style="width: 70%; margin-left: 15%;border-radius: 5px;">
+					</div>
+
+					<div class="left" style="margin-left: 15px">
+
+						<label for="tester">测试人员
+							<select id="tester" name="tester_one">
+								<option>Tester 1</option>
+								<option>Tester 2</option>
+								<option>Tester 3</option>
+								<option>Tester 4</option>
+							</select>
+						</label>
+					</div>
+				</form>
+			</div>
+
+			<ul class="side-nav">
+				<li class="divider"></li>
+			</ul>
+
+			<br>
+			<p>
+				<b>该月电话总费用：</b>
+				<b style="color: #C91623;">{{ result }}</b>
+			</p>
+		</fieldset>
+
+		<fieldset>
+			<legend>CSV Phone Bill Testing</legend>
+			<div class="row">
+				<form enctype="multipart/form-data" action="/phone_post/" method="post">
+					{% csrf_token %}
+					<div class="large-6 columns">
+						<input type="file" name="myFile" placeholder="上传文件" class="button postfix"
+						       style="padding-left: 20px; background-color: #008cba33">
+					</div>
+
+					<div class="large-3 columns">
+						<p style="color: #C91623;">{{ isUploaded }}</p>
+					</div>
+
+					<div class="large-3 columns">
+						<input type="submit" class="button postfix "
+						       style="width: 70%; margin-left: 15%; border-radius: 5px;" value="确 定">
+					</div>
+					<div class="left" style="margin-left: 15px">
+
+						<label for="tester">测试人员
+							<select id="tester" name="tester_many">
+								<option>Tester 1</option>
+								<option>Tester 2</option>
+								<option>Tester 3</option>
+								<option>Tester 4</option>
+							</select>
+						</label>
+					</div>
+				</form>
+			</div>
+			<ul class="side-nav">
+				<li class="divider"></li>
+			</ul>
+
+			<div class="responsive">
+				<table>
+					<thead>
+					<tr>
+						<th style="text-align: center">用例编号</th>
+						<th style="text-align: center">用例</th>
+						<th style="text-align: center">预期话费</th>
+						<th style="text-align: center">实际话费</th>
+						<th style="text-align: center">测试时间</th>
+						{#						<th>Age</th>#}
+						{#						<th>Country</th>#}
+					</tr>
+					</thead>
+					{% load mytags %}
+					{% load mytags2 %}
+					{% load mytags3 %}
+					{% load mytags4 %}
+					<tbody>
+					{% for i in number %}
+						<tr>
+							<td>{{ i }}</td>
+							<td>{{ sideLst|qwer11 }}</td>
+							<td>{{ resultLst|qwer22 }}</td>
+							<td>{{ expectLst|qwer33 }}</td>
+							<td>{{ timeLst|qwer44 }}</td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+
+		</fieldset>
+	</div>
+
+	<div class="large-5 columns">
+		<h3>分 析</h3>
+		<ul class="side-nav">
+			<li class="divider"></li>
+		</ul>
+
+		<div id="container" style="height: 400px; margin: 0"></div>
+	</div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $(document).foundation();
+    })
+
+</script>
 </body>
 </html>

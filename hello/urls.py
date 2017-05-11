@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from hello import triangle, index, nextDay, views, sales
+from hello import triangle, index, nextDay, views, sales, phone
 import hello
 import settings
 
@@ -32,11 +32,16 @@ urlpatterns = [
 	url(r'^triangle_input/', triangle.triangle_input),
 	url(r'^sale_input/', sales.sales_Post),
 	url(r'^sales/', sales.csv_sales_Post),
+	
 	url(r'^toIndex/$', hello.views.toIndex, name='toIndex'),
 	url(r'^toNextday/$', hello.views.toNextDay, name='toNextDay'),
 	url(r'^toCommission/$', hello.views.toCommission, name='toCommission'),
 	url(r'^toCommission2/$', hello.views.toCommission2, name='toCommission2'),
-	url(r'^combination_input/', sales.reward_Post)
+	url(r'^toPhoneBill/$', hello.views.toPhoneBill, name='toPhoneBill'),
+	url(r'^combination_input/', sales.reward_Post),
+	
+	url(r'^phone_input/', phone.phone_input),
+	url(r'^phone_post/', phone.phone_post)
 	
 	# (r'^static/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.STATIC_PATH})
 ]

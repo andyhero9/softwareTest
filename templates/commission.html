@@ -82,6 +82,8 @@
 			<li class="divider"></li>
 			<li class="active"><a href="#">推 销 员 佣 金</a></li>
 			<li class="divider"></li>
+			<li><a href="{% url 'toPhoneBill' %}">话 费 问 题</a></li>
+			<li class="divider"></li>
 			<li><a href="#">。。。</a></li>
 			<li class="divider"></li>
 		</ul>
@@ -114,6 +116,18 @@
 						<input type="submit" class="button postfix"
 						       style="width: 70%; margin-left: 15%;border-radius: 5px;">
 					</div>
+					<div class="left" style="margin-left: 15px">
+
+						<label for="tester">测试人员
+							<select id="tester" name="tester_one">
+								<option>Tester 1</option>
+								<option>Tester 2</option>
+								<option>Tester 3</option>
+								<option>Tester 4</option>
+							</select>
+						</label>
+					</div>
+
 				</form>
 			</div>
 
@@ -149,6 +163,17 @@
 					<div class="large-3 columns">
 						<input type="submit" class="button postfix "
 						       style="width: 70%; margin-left: 15%; border-radius: 5px;" value="提 交">
+					</div>
+					<div class="left" style="margin-left: 15px">
+
+						<label for="tester">测试人员
+							<select id="tester" name="tester_many">
+								<option>Tester 1</option>
+								<option>Tester 2</option>
+								<option>Tester 3</option>
+								<option>Tester 4</option>
+							</select>
+						</label>
 					</div>
 				</form>
 			</div>
