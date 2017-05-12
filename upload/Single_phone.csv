@@ -6,3 +6,4 @@ No.,holding_Time,owe_Num,month,Expect,Reality,Result,Time,Staff
 001,300,1,5,68.875,68.875,True,2017-05-12 09:14:42,Tester
 002,300,2,6,68.875,68.875,True,2017-05-12 09:19:48,Tester 1
 003,138,2,6,45.286,45.286,True,2017-05-12 09:33:17,Tester 1
+0,200,1,1,month:1=> owe_Num:1,month:1=> owe_Num:1,True,2017-05-12 02:41:48,Tester 1
