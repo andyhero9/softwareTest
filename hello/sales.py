@@ -101,6 +101,7 @@ def csv_sales_Post(request):
     timeLst = []
     numberLst = []
     staffLst=[]
+    tester = str(request.POST['tester_many'])
     for line in reader:
         numberLst.append(line[0])
         x = int(line[1])
@@ -112,7 +113,7 @@ def csv_sales_Post(request):
         inputNum = ','.join([str(x), str(y), str(z)])
         inputLst.append(inputNum)
         expectLst.append(line[5])
-        staffLst.append('Tester')
+        staffLst.append(tester)
 
     context['number'] = numberLst
     context['resultLst'] = resultLst
@@ -144,13 +145,14 @@ def sales_Post(request):
         x = int(request.POST["x"])
         y = int(request.POST["y"])
         z = int(request.POST["z"])
+        tester = str(request.POST['tester_one'])
         resultLst = ['error']
         input_Num(x, y, z, resultLst)
         nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         context = {}
         context['reward'] = resultLst[1]
         # context['time'] = nowTime
-        insertCsv(x,y,z,resultLst[1],resultLst[1],nowTime,'Tester','Single_sales')
+        insertCsv(x,y,z,resultLst[1],resultLst[1],nowTime,tester,'Single_sales')
         return render(request, 'commission.html', context)
     except:
         context = {}

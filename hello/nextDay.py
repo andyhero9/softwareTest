@@ -94,6 +94,7 @@ def nextDay_Post(request):
         year = request.POST["year"]
         month = request.POST["month"]
         day = request.POST["day"]
+        tester = str(request.POST['tester_one'])
         resultLst = ['error']
         nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         nextDay(year, month, day, resultLst)
@@ -102,7 +103,7 @@ def nextDay_Post(request):
         # context['time'] = nowTime
         expect = resultLst[1]
         reality = resultLst[1]
-        insertCsv(year, month, day, expect, reality, nowTime, 'Tesyer', 'Single_date')
+        insertCsv(year, month, day, expect, reality, nowTime, tester, 'Single_date')
         return render(request, 'nextDay.html', context)
     except:
         context = {}
@@ -163,6 +164,7 @@ def nextDay_Post_Csv(request):
     inputLst=[]
     numberLst=[]
     staffLst=[]
+    tester = str(request.POST['tester_many'])
     for line in reader:
         numberLst.append(line[0])
         year = int(line[1])
@@ -174,7 +176,7 @@ def nextDay_Post_Csv(request):
         csv_nextDay(year, month, day, resultLst, percentage)
         nowTime = datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S')
         timeLst.append(nowTime)
-        staffLst.append('Tester')
+        staffLst.append(tester)
 
     context['number'] = numberLst
     context['nextDayLst'] = resultLst

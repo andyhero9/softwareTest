@@ -39,7 +39,7 @@ def phone_post(request):
 	expectLst = []
 	timeLst = []
 	staffLst = []
-	
+	tester = str(request.POST['tester_many'])
 				
 	for line in reader:
 		numberLst.append(line[0])
@@ -54,7 +54,7 @@ def phone_post(request):
 		timeLst.append(nowTime)
 		side = str(holding_Time) + ',' + str(owe_Num) + ',' + str(month)
 		sideLst.append(side)
-		staffLst.append('Tester')
+		staffLst.append(tester)
 	
 	print percentage.count("l1")
 	print percentage.count("l2")
@@ -88,14 +88,16 @@ def phone_input(request):
 		int(request.POST["holding_Time"])
 		int(request.POST["owe_Num"])
 		int(request.POST["month"])
+		str(request.POST['tester_one'])
 		holding_Time = int(request.POST["holding_Time"])
 		owe_Num = int(request.POST["owe_Num"])
 		month = int(request.POST["month"])
+		tester = str(request.POST['tester_one'])
 		
 		result = str(calculate_Bill(holding_Time, owe_Num, month))
 		
 		nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-		insertCsv(holding_Time, owe_Num, month, result, result, nowTime, 'Tester', 'Single_phone')
+		insertCsv(holding_Time, owe_Num, month, result, result, nowTime, tester, 'Single_phone')
 		
 		context = {}
 		context['result'] = result

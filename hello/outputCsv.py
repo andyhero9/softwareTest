@@ -31,7 +31,7 @@ def insertCsv(x, y, z, expect, reality, time, staff, name):
 	
 	filename = ''.join(['../softwareTest/upload/', name, '.csv'])
 	
-	if expect == reality:
+	if str(expect) == str(reality):
 		result = 'True'
 	else:
 		result = 'False'
