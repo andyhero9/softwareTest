@@ -101,6 +101,7 @@ def csv_sales_Post(request):
     timeLst = []
     numberLst = []
     staffLst=[]
+    salesLst=[]
     tester = str(request.POST['tester_many'])
     for line in reader:
         numberLst.append(line[0])
@@ -112,9 +113,11 @@ def csv_sales_Post(request):
         timeLst.append(nowTime)
         inputNum = ','.join([str(x), str(y), str(z)])
         inputLst.append(inputNum)
+        salesLst.append(line[4])
         expectLst.append(line[5])
         staffLst.append(tester)
 
+    context['salesLst'] = salesLst
     context['number'] = numberLst
     context['resultLst'] = resultLst
     context['inputLst'] = inputLst
