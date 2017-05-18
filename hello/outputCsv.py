@@ -38,6 +38,7 @@ def insertCsv(x, y, z, expect, reality, time, staff, name):
 	
 	
 	with open(filename, 'ab+') as csvfiles:
+		"""
 		num = 0
 		csvfiles.readline()
 		reader = csv.reader(csvfiles)
@@ -48,4 +49,16 @@ def insertCsv(x, y, z, expect, reality, time, staff, name):
 		spamwriter = csv.writer(csvfiles, dialect='excel')
 		spamwriter.writerow([num, x, y, z, expect, reality, result, time, staff])
 		csvfiles.close()
-		
+		"""
+		csvfiles.readline()
+		reader = csv.reader(csvfiles)
+		temp = ''
+		for line in reader:
+			Number = line[0]
+		temp = Number
+		num = str(int(temp[2:5]) + 1).zfill(3)
+		Num = temp[0:2]+num
+
+		spamwriter = csv.writer(csvfiles, dialect='excel')
+		spamwriter.writerow([Num, x, y, z, expect, reality, result, time, staff])
+		csvfiles.close()

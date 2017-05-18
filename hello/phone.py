@@ -84,30 +84,28 @@ def phone_post(request):
 
 def phone_input(request):
 	try:
-		
 		int(request.POST["holding_Time"])
 		int(request.POST["owe_Num"])
 		int(request.POST["month"])
 		str(request.POST['tester_one'])
 		holding_Time = int(request.POST["holding_Time"])
-		#print holding_Time
 		owe_Num = int(request.POST["owe_Num"])
 		month = int(request.POST["month"])
 		tester = str(request.POST['tester_one'])
-		
+
 		result = str(calculate_Bill(holding_Time, owe_Num, month))
-		
+
 		nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 		insertCsv(holding_Time, owe_Num, month, result, result, nowTime, tester, 'Single_phone')
-		
+
 		context = {}
 		context['result'] = result
-				
+
 		return render(request, 'phone.html', context)
-	
+
 	except:
 		context = {}
-		context['result'] = "输入有误"
+		context['result'] = "error"
 		return render(request, 'phone.html', context)
 
 
@@ -149,7 +147,7 @@ def calculate_Bill_per(holding_Time, owe_Num, month, percentage):
 				else:
 					Fee = 25 + holding_Time * 0.15
 					return Fee
-			elif 300 < int(holding_Time):
+			elif 300 < int(holding_Time)<=44640:
 				percentage.append("l5")
 				if 0 <= int(owe_Num) <= 6:
 					Fee = 25 + holding_Time * 0.15 * 0.97
@@ -163,6 +161,9 @@ def calculate_Bill_per(holding_Time, owe_Num, month, percentage):
 			elif int(holding_Time) < 0:
 				Fee = 25
 				return "输入有误"
+			elif int(holding_Time) > 44640:
+				Fee = 25
+				return "outTime"
 		else:
 			result = 'month:' + str(month) + '<= owe_Num:' + str(owe_Num)
 			return result
@@ -200,7 +201,7 @@ def calculate_Bill(holding_Time, owe_Num, month):
 			else:
 				Fee = 25 + holding_Time * 0.15
 				return Fee
-		elif 300 < int(holding_Time):
+		elif 300 < int(holding_Time)<=44640:
 			if 0 <= int(owe_Num) <= 6:
 				Fee = 25 + holding_Time * 0.15 * 0.97
 				return Fee
@@ -213,6 +214,9 @@ def calculate_Bill(holding_Time, owe_Num, month):
 		elif int(holding_Time) < 0:
 			Fee = 25
 			return "输入有误"
+		elif int(holding_Time) > 44640:
+			Fee = 25
+			return "outTime"
 	else:
 		result = 'month:' + str(month) + '<= owe_Num:' + str(owe_Num)
 		return result

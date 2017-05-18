@@ -22,13 +22,13 @@ def input_Num(x, y, z, resultLst):
             if 1 <= z <= 80:
                 total_Sales(x, y, z, resultLst)
             else:
-                result = "外设数量错误"
+                result = "显示器数量错误"
                 resultLst.append(result)
         else:
             result = "主机数量错误"
             resultLst.append(result)
     else:
-        result = "显示器数量错误"
+        result = "外设数量错误"
         resultLst.append(result)
 
 

@@ -1,37 +1,43 @@
 No.,holding_Time,owe_Num,month,Expect,Reality,Result,Time,Staff
-0,200,1,2,54.25,54.25,True,2017-05-11 11:41:06,Tester
-0,200,1,2,54.25,54.25,True,2017-05-11 11:42:07,Tester
-0,300,1,2,68.875,68.875,True,2017-05-11 11:42:14,Tester
-0,300,1,2,68.875,68.875,True,2017-05-11 11:44:43,Tester
-001,300,1,5,68.875,68.875,True,2017-05-12 09:14:42,Tester
-002,300,2,6,68.875,68.875,True,2017-05-12 09:19:48,Tester 1
-003,138,2,6,45.286,45.286,True,2017-05-12 09:33:17,Tester 1
-0,200,1,1,month:1=> owe_Num:1,month:1=> owe_Num:1,True,2017-05-12 02:41:48,Tester 1
-001,111,1,5,41.40025,41.40025,True,2017-05-18 19:46:59,Tester 1
-002,123,1,15,time error,time error,True,2017-05-18 20:18:00,Tester 1
-003,111,15,1,time error,time error,True,2017-05-18 20:18:07,Tester 1
-004,3,5,5,month:5=> owe_Num:5,month:5=> owe_Num:5,True,2017-05-18 21:07:57,Tester 1
-005,1,1,3,25.1485,25.1485,True,2017-05-18 21:08:03,Tester 1
-006,350,2,5,75.925,75.925,True,2017-05-18 21:51:04,Tester 2
-007,44640,5,8,6520.12,6520.12,True,2017-05-18 21:52:38,Tester 1
-008,-5,1,2,25,25,True,2017-05-18 23:29:38,Tester 1
-009,-9,1,4,25,25,True,2017-05-18 23:29:58,Tester 1
-010,20,12,12,time error,time error,True,2017-05-18 23:38:01,Tester 1
-001,20,1,3,27.97,27.97,True,2017-05-18 23:38:06,Tester 1
-002,20,13,1,time error,time error,True,2017-05-18 23:38:18,Tester 1
-003,20,1,25,time error,time error,True,2017-05-18 23:38:41,Tester 1
-004,-5,1,2,25,25,True,2017-05-18 23:53:21,Tester 1
-005,1,22,2,time error,time error,True,2017-05-18 23:53:27,Tester 1
-006,4,-5,5,25.6,25.6,True,2017-05-18 23:53:37,Tester 1
-007,5,-5,6,25.75,25.75,True,2017-05-18 23:53:45,Tester 1
-008,5,22,225,time error,time error,True,2017-05-18 23:54:13,Tester 1
-009,5,5,-5,month:-5=> owe_Num:5,month:-5=> owe_Num:5,True,2017-05-18 23:54:32,Tester 1
-010,5,-5,5,25.75,25.75,True,2017-05-18 23:54:40,Tester 1
-001,5,-5,4,25.75,25.75,True,2017-05-18 23:56:08,Tester 1
-002,-5,1,5,25,25,True,2017-05-18 23:57:29,Tester 1
-003,-5,1,2,25,25,True,2017-05-18 23:59:03,Tester 1
-004,-5,1,2,25,25,True,2017-05-19 00:00:03,Tester 1
-005,-5,1,5,25,25,True,2017-05-19 00:00:24,Tester 1
-006,-5,1,2,杈撳叆鏈夎,杈撳叆鏈夎,True,2017-05-19 00:07:20,Tester 1
-007,5,13,1,time error,time error,True,2017-05-19 00:07:28,Tester 1
-008,13,1,-5,time error,time error,True,2017-05-19 00:07:37,Tester 1
+PT001,200,1,2,54.25,54.25,TRUE,2017/5/11 11:41,Tester
+PT002,200,1,2,54.25,54.25,TRUE,2017/5/11 11:42,Tester
+PT003,300,1,2,68.875,68.875,TRUE,2017/5/11 11:42,Tester
+PT004,300,1,2,68.875,68.875,TRUE,2017/5/11 11:44,Tester
+PT005,300,1,5,68.875,68.875,TRUE,2017/5/12 9:14,Tester
+PT006,300,2,6,68.875,68.875,TRUE,2017/5/12 9:19,Tester 1
+PT007,138,2,6,45.286,45.286,TRUE,2017/5/12 9:33,Tester 1
+PT008,200,1,1,month:1=> owe_Num:1,month:1=> owe_Num:1,TRUE,2017/5/12 2:41,Tester 1
+PT009,111,1,5,41.40025,41.40025,TRUE,2017/5/18 19:46,Tester 1
+PT010,123,1,15,time error,time error,TRUE,2017/5/18 20:18,Tester 1
+PT011,111,15,1,time error,time error,TRUE,2017/5/18 20:18,Tester 1
+PT012,3,5,5,month:5=> owe_Num:5,month:5=> owe_Num:5,TRUE,2017/5/18 21:07,Tester 1
+PT013,1,1,3,25.1485,25.1485,TRUE,2017/5/18 21:08,Tester 1
+PT014,350,2,5,75.925,75.925,TRUE,2017/5/18 21:51,Tester 2
+PT015,44640,5,8,6520.12,6520.12,TRUE,2017/5/18 21:52,Tester 1
+PT016,-5,1,2,25,25,TRUE,2017/5/18 23:29,Tester 1
+PT017,-9,1,4,25,25,TRUE,2017/5/18 23:29,Tester 1
+PT018,20,12,12,time error,time error,TRUE,2017/5/18 23:38,Tester 1
+PT019,20,1,3,27.97,27.97,TRUE,2017/5/18 23:38,Tester 1
+PT020,20,13,1,time error,time error,TRUE,2017/5/18 23:38,Tester 1
+PT021,20,1,25,time error,time error,TRUE,2017/5/18 23:38,Tester 1
+PT022,-5,1,2,25,25,TRUE,2017/5/18 23:53,Tester 1
+PT023,1,22,2,time error,time error,TRUE,2017/5/18 23:53,Tester 1
+PT024,4,-5,5,25.6,25.6,TRUE,2017/5/18 23:53,Tester 1
+PT025,5,-5,6,25.75,25.75,TRUE,2017/5/18 23:53,Tester 1
+PT026,5,22,225,time error,time error,TRUE,2017/5/18 23:54,Tester 1
+PT027,5,5,-5,month:-5=> owe_Num:5,month:-5=> owe_Num:5,TRUE,2017/5/18 23:54,Tester 1
+PT028,5,-5,5,25.75,25.75,TRUE,2017/5/18 23:54,Tester 1
+PT029,5,-5,4,25.75,25.75,TRUE,2017/5/18 23:56,Tester 1
+PT030,-5,1,5,25,25,TRUE,2017/5/18 23:57,Tester 1
+PT031,-5,1,2,25,25,TRUE,2017/5/18 23:59,Tester 1
+PT032,-5,1,2,25,25,TRUE,2017/5/19 0:00,Tester 1
+PT033,-5,1,5,25,25,TRUE,2017/5/19 0:00,Tester 1
+PT034,-5,1,2,输入有误,输入有误,TRUE,2017/5/19 0:07,Tester 1
+PT035,5,13,1,time error,time error,TRUE,2017/5/19 0:07,Tester 1
+PT036,13,1,-5,time error,time error,TRUE,2017/5/19 0:07,Tester 1
+PT037,5,1,5,25.7425,25.7425,TRUE,2017/5/19 0:24,Tester 1
+PT038,55555,1,2,outTime,outTime,TRUE,2017/5/19 0:24,Tester 1
+PT039,45,1,5,31.6825,31.6825,TRUE,2017/5/19 0:43,Tester 1
+PT040,12,1,4,26.782,26.782,TRUE,2017/5/19 0:45,Tester 1
+PT041,500,2,8,97.75,97.75,True,2017-05-19 00:49:00,Tester 1
+PT042,50,1,5,32.425,32.425,True,2017-05-19 00:50:17,Tester 1
