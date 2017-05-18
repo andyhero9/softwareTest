@@ -39,7 +39,7 @@ def csv_Num(x, y, z, resultLst):
             if 1 <= z <= 80:
                 total_Sales(x, y, z, resultLst)
             else:
-                result = "外设数量错误"
+                result = "显示器外设数量错误"
                 output.d = output.d + 1
                 resultLst.append(result)
         else:
@@ -47,7 +47,7 @@ def csv_Num(x, y, z, resultLst):
             output.d = output.d + 1
             resultLst.append(result)
     else:
-        result = "显示器数量错误"
+        result = "外设数量错误"
         output.d = output.d + 1
         resultLst.append(result)
 
@@ -113,8 +113,8 @@ def csv_sales_Post(request):
         timeLst.append(nowTime)
         inputNum = ','.join([str(x), str(y), str(z)])
         inputLst.append(inputNum)
-        salesLst.append(line[4])
         expectLst.append(line[5])
+        salesLst.append(line[4])
         staffLst.append(tester)
 
     context['salesLst'] = salesLst
@@ -122,7 +122,7 @@ def csv_sales_Post(request):
     context['resultLst'] = resultLst
     context['inputLst'] = inputLst
     context['expectLst'] = expectLst
-    context['timeLst'] = timeLst
+    #context['timeLst'] = timeLst
     context['total'] = len(inputLst)
     context['wrongInput'] = output.d
     context['low'] = output.a

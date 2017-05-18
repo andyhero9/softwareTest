@@ -90,6 +90,7 @@ def phone_input(request):
 		int(request.POST["month"])
 		str(request.POST['tester_one'])
 		holding_Time = int(request.POST["holding_Time"])
+		#print holding_Time
 		owe_Num = int(request.POST["owe_Num"])
 		month = int(request.POST["month"])
 		tester = str(request.POST['tester_one'])
@@ -111,59 +112,64 @@ def phone_input(request):
 
 
 def calculate_Bill_per(holding_Time, owe_Num, month, percentage):
-	if int(owe_Num) > 11 or month > 12:
+	#print holding_Time
+	if int(owe_Num) > 11 or int(month) > 12 or int(owe_Num)<0 or int(month)<0:
 		return "time error"
-	if int(owe_Num) < int(month):
-		if 0 < int(holding_Time) <= 60:
-			percentage.append("l1")
-			if 0 <= int(owe_Num) <= 1:
-				Fee = 25 + holding_Time * 0.15 * 0.99
-				return Fee
-			else:
-				Fee = 25 + holding_Time * 0.15
-				return Fee
-		elif 60 < int(holding_Time) <= 120:
-			percentage.append("l2")
-			if 0 <= int(owe_Num) <= 2:
-				Fee = 25 + holding_Time * 0.15 * 0.985
-				return Fee
-			else:
-				Fee = 25 + holding_Time * 0.15
-				return Fee
-		elif 120 < int(holding_Time) <= 180:
-			percentage.append("l3")
-			if 0 <= int(owe_Num) <= 3:
-				Fee = 25 + holding_Time * 0.15 * 0.98
-				return Fee
-			else:
-				Fee = 25 + holding_Time * 0.15
-				return Fee
-		elif 180 < int(holding_Time) <= 300:
-			percentage.append("l4")
-			if 0 <= int(owe_Num) <= 3:
-				Fee = 25 + holding_Time * 0.15 * 0.975
-				return Fee
-			else:
-				Fee = 25 + holding_Time * 0.15
-				return Fee
-		elif 300 < int(holding_Time):
-			percentage.append("l5")
-			if 0 <= int(owe_Num) <= 6:
-				Fee = 25 + holding_Time * 0.15 * 0.97
-				return Fee
-			else:
-				Fee = 25 + holding_Time * 0.15
-				return Fee
-		elif int(holding_Time) <= 0:
-			Fee = 25
-			return Fee
 	else:
-		result = 'month:' + str(month) + '=> owe_Num:' + str(owe_Num)
-		return result
+		if int(owe_Num) < int(month):
+			if 0 < int(holding_Time) <= 60:
+				percentage.append("l1")
+				if 0 <= int(owe_Num) <= 1:
+					Fee = 25 + holding_Time * 0.15 * 0.99
+					return Fee
+				else:
+					Fee = 25 + holding_Time * 0.15
+					return Fee
+			elif 60 < int(holding_Time) <= 120:
+				percentage.append("l2")
+				if 0 <= int(owe_Num) <= 2:
+					Fee = 25 + holding_Time * 0.15 * 0.985
+					return Fee
+				else:
+					Fee = 25 + holding_Time * 0.15
+					return Fee
+			elif 120 < int(holding_Time) <= 180:
+				percentage.append("l3")
+				if 0 <= int(owe_Num) <= 3:
+					Fee = 25 + holding_Time * 0.15 * 0.98
+					return Fee
+				else:
+					Fee = 25 + holding_Time * 0.15
+					return Fee
+			elif 180 < int(holding_Time) <= 300:
+				percentage.append("l4")
+				if 0 <= int(owe_Num) <= 3:
+					Fee = 25 + holding_Time * 0.15 * 0.975
+					return Fee
+				else:
+					Fee = 25 + holding_Time * 0.15
+					return Fee
+			elif 300 < int(holding_Time):
+				percentage.append("l5")
+				if 0 <= int(owe_Num) <= 6:
+					Fee = 25 + holding_Time * 0.15 * 0.97
+					return Fee
+				else:
+					Fee = 25 + holding_Time * 0.15
+					return Fee
+			elif int(holding_Time) == 0:
+				Fee = 25
+				return Fee
+			elif int(holding_Time) < 0:
+				Fee = 25
+				return "输入有误"
+		else:
+			result = 'month:' + str(month) + '<= owe_Num:' + str(owe_Num)
+			return result
 	
 
 def calculate_Bill(holding_Time, owe_Num, month):
-	if int(owe_Num) > 11 or month > 12:
+	if int(owe_Num) > 11 or int(month) > 12 or int(owe_Num) < 0 or int(month) < 0:
 		return "time error"
 	if int(owe_Num) < int(month):
 		if 0 < int(holding_Time) <= 60:
@@ -201,9 +207,12 @@ def calculate_Bill(holding_Time, owe_Num, month):
 			else:
 				Fee = 25 + holding_Time * 0.15
 				return Fee
-		elif int(holding_Time) <= 0:
+		elif int(holding_Time) == 0:
 			Fee = 25
 			return Fee
+		elif int(holding_Time) < 0:
+			Fee = 25
+			return "输入有误"
 	else:
-		result = 'month:' + str(month) + '=> owe_Num:' + str(owe_Num)
+		result = 'month:' + str(month) + '<= owe_Num:' + str(owe_Num)
 		return result

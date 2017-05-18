@@ -12,3 +12,26 @@ No.,holding_Time,owe_Num,month,Expect,Reality,Result,Time,Staff
 003,111,15,1,time error,time error,True,2017-05-18 20:18:07,Tester 1
 004,3,5,5,month:5=> owe_Num:5,month:5=> owe_Num:5,True,2017-05-18 21:07:57,Tester 1
 005,1,1,3,25.1485,25.1485,True,2017-05-18 21:08:03,Tester 1
+006,350,2,5,75.925,75.925,True,2017-05-18 21:51:04,Tester 2
+007,44640,5,8,6520.12,6520.12,True,2017-05-18 21:52:38,Tester 1
+008,-5,1,2,25,25,True,2017-05-18 23:29:38,Tester 1
+009,-9,1,4,25,25,True,2017-05-18 23:29:58,Tester 1
+010,20,12,12,time error,time error,True,2017-05-18 23:38:01,Tester 1
+001,20,1,3,27.97,27.97,True,2017-05-18 23:38:06,Tester 1
+002,20,13,1,time error,time error,True,2017-05-18 23:38:18,Tester 1
+003,20,1,25,time error,time error,True,2017-05-18 23:38:41,Tester 1
+004,-5,1,2,25,25,True,2017-05-18 23:53:21,Tester 1
+005,1,22,2,time error,time error,True,2017-05-18 23:53:27,Tester 1
+006,4,-5,5,25.6,25.6,True,2017-05-18 23:53:37,Tester 1
+007,5,-5,6,25.75,25.75,True,2017-05-18 23:53:45,Tester 1
+008,5,22,225,time error,time error,True,2017-05-18 23:54:13,Tester 1
+009,5,5,-5,month:-5=> owe_Num:5,month:-5=> owe_Num:5,True,2017-05-18 23:54:32,Tester 1
+010,5,-5,5,25.75,25.75,True,2017-05-18 23:54:40,Tester 1
+001,5,-5,4,25.75,25.75,True,2017-05-18 23:56:08,Tester 1
+002,-5,1,5,25,25,True,2017-05-18 23:57:29,Tester 1
+003,-5,1,2,25,25,True,2017-05-18 23:59:03,Tester 1
+004,-5,1,2,25,25,True,2017-05-19 00:00:03,Tester 1
+005,-5,1,5,25,25,True,2017-05-19 00:00:24,Tester 1
+006,-5,1,2,输入有误,输入有误,True,2017-05-19 00:07:20,Tester 1
+007,5,13,1,time error,time error,True,2017-05-19 00:07:28,Tester 1
+008,13,1,-5,time error,time error,True,2017-05-19 00:07:37,Tester 1
