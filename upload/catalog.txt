@@ -1,1 +1,1 @@
-../softwareTest/upload/phone_BJ.csv
+../softwareTest/upload/phone_JC.csv
